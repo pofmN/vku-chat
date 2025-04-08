@@ -1,0 +1,11 @@
+# Google Gemini API Key
+#GEMINI_API_KEY = "AIzaSyCzUnuDBgRcmw54gldDiFJ2suN8IGWr92E"
+GEMINI_API_KEY = "AIzaSyDxtlgDtQnbg4enW1PHNOUFvtVfzSKyPqQ" #nampv.21it
+# GEMINI_API_KEY = "AIzaSyDDQXvbnAQ_tao-xOg01w9qMY6FYUv0xqg" #nam03412003
+# GEMINI_API_KEY = "AIzaSyC0GqAiH4in6728AYTtQ3LbHyKOCCUxN0o" #nampv4123
+# GEMINI_API_KEY = "AIzaSyA3TMggka9oIzoM0ekgWLRFqgD_Injpxk4" #nam04412003
+# GEMINI_API_KEY = "AIzaSyCLzMyymhb2UF7vc2lKswSFgj1fVYw3EcY" #nam02412003
+# GEMINI_API_KEY = "AIzaSyA3U-88WJKcVWaa10ZA6Bxflo86mjgPv_0" #nam05412003
+QDRANT_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.WGTyTQsw7kfbLr-psi6d-YhXBI61cuIGhBauvqm6tys"
+QDRANT_URL = "https://a38eafea-d9e4-4afa-8dff-3b6b65420691.us-east4-0.gcp.cloud.qdrant.io"
+#QDRANT_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3MiOiJyIn0.7bZ5o6dAqghB-cdKNLmTkF7JFozIrRftD56LubK-RZw"

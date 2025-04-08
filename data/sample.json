@@ -1,0 +1,933 @@
+{
+    "thông tin liên hệ": {
+        "văn phòng tuyển sinh": {
+            "địa chỉ": "Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn, Khu Đô thị Đại học, P. Hòa Quý, Q. Ngũ Hành Sơn, TP. Đà Nẵng",
+            "số điện thoại": "0236 655 2688",
+            "email": "tuyensinh@vku.udn.vn",
+            "website": "http://tuyensinh.vku.udn.vn",
+            "fanpage": "https://www.facebook.com/vku.udn.vn",
+            "hotline hỗ trợ": "1800 1234 (Hỗ trợ nhập học)"
+        },
+        "bộ phận hỗ trợ sinh viên": {
+            "tên": "Trung tâm Hỗ trợ Sinh viên VKU",
+            "địa chỉ": "Tầng 2, Tòa nhà Chính, Trường VKU",
+            "số điện thoại": "0236 355 5678",
+            "email": "hotrosinhvien@vku.udn.vn",
+            "mô tả": "Trung tâm hỗ trợ sinh viên trong các vấn đề về học tập, việc làm, tâm lý và các chính sách hỗ trợ tài chính."
+        },
+        "bộ phận dịch vụ sinh viên": {
+            "tên": "Phòng Công tác Sinh viên",
+            "địa chỉ": "Tầng 3, Tòa nhà Chính, Trường VKU",
+            "số điện thoại": "0236 377 8899",
+            "email": "ctsv@vku.udn.vn",
+            "mô tả": "Hỗ trợ sinh viên về ký túc xá, hoạt động ngoại khóa, thẻ sinh viên và các chế độ chính sách."
+        },
+        "hỗ trợ học tập": {
+            "mô tả": "Trường VKU cung cấp nhiều kênh hỗ trợ học tập để giúp sinh viên tiếp cận kiến thức và giải quyết các khó khăn trong học tập.",
+            "kênh hỗ trợ": [
+                {
+                    "tên": "Hệ thống quản lý học tập trực tuyến",
+                    "mô tả": "Sinh viên có thể truy cập tài liệu, bài giảng, bài tập qua hệ thống e-learning của trường.",
+                    "website": "http://lms.vku.udn.vn"
+                },
+                {
+                    "tên": "Trung tâm học liệu",
+                    "mô tả": "Cung cấp tài liệu học tập, sách tham khảo, và không gian học tập yên tĩnh cho sinh viên."
+                },
+                {
+                    "tên": "Hỗ trợ từ giảng viên",
+                    "mô tả": "Sinh viên có thể đặt lịch gặp trực tiếp giảng viên hoặc gửi câu hỏi qua email để được hỗ trợ."
+                }
+            ]
+        }
+    },
+    "khái quát chung": {
+        "lịch sử hình thành": {
+            "mô tả": "Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU) được thành lập theo Quyết định số 15/QĐ-TTg ngày 03/01/2020 của Thủ tướng Chính phủ.",
+            "mục đích": "VKU ra đời nhằm cung cấp nguồn nhân lực số phục vụ công nghiệp hóa, hiện đại hóa đất nước và hội nhập quốc tế.",
+            "cơ sở hình thành": [
+                "Trường Cao đẳng Công nghệ thông tin Hữu nghị Việt - Hàn (Bộ Thông tin và Truyền thông).",
+                "Trường Cao đẳng Công nghệ thông tin (Đại học Đà Nẵng).",
+                "Khoa Công nghệ Thông tin và Truyền thông (Đại học Đà Nẵng)."
+            ]
+        },
+        "chức năng nhiệm vụ": {
+            "chức năng": "VKU là cơ sở giáo dục đại học đào tạo đa cấp, đa ngành trong lĩnh vực công nghệ thông tin, truyền thông và kinh tế số.",
+            "nhiệm vụ": [
+                "Triển khai đào tạo, nghiên cứu khoa học và hợp tác quốc tế.",
+                "Phát triển chương trình đào tạo theo mục tiêu thực tiễn.",
+                "Quản lý và bồi dưỡng đội ngũ giảng viên, cán bộ quản lý.",
+                "Đánh giá chất lượng đào tạo và kiểm định giáo dục.",
+                "Hợp tác với các tổ chức kinh tế, giáo dục, nghiên cứu khoa học trong và ngoài nước."
+            ]
+        },
+        "sứ mệnh tầm nhìn": {
+            "sứ mệnh": "Đào tạo và cung cấp nguồn nhân lực chất lượng cao, nghiên cứu khoa học và chuyển giao công nghệ phục vụ phát triển kinh tế - xã hội.",
+            "tầm nhìn": "Trở thành trường đại học hàng đầu về Công nghệ thông tin, Truyền thông và Kinh tế số tại Việt Nam.",
+            "giá trị cốt lõi": [
+                "Đức - Trí - Thể - Mỹ.",
+                "Uy tín - Chất lượng - Chuyên nghiệp.",
+                "Kế thừa - Đổi mới - Sáng tạo."
+            ],
+            "triết lý giáo dục": "Nhân bản - Phụng sự - Khai phóng."
+        },
+        "đội ngũ giảng viên": {
+            "tổng quan": "Trường VKU có đội ngũ giảng viên đạt trình độ cao, với tỷ lệ giảng viên có trình độ thạc sĩ trở lên đạt 100%.",
+            "thống kê": {
+                "tổng cán bộ": 229,
+                "cán bộ giảng dạy": 132,
+                "tỷ lệ thạc sĩ trở lên": "100%",
+                "số phó giáo sư": 2,
+                "số tiến sĩ": 50,
+                "số thạc sĩ": 88
+            },
+            "đào tạo quốc tế": "Giảng viên được đào tạo từ các nước như Mỹ, Pháp, Nhật Bản, Anh, Hàn Quốc, Úc..."
+        }
+    },
+    "cơ cấu tổ chức": {
+        "mô hình quản lý": {
+            "mô tả": "Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU) hoạt động theo mô hình đại học tự chủ, chịu sự quản lý của Đại học Đà Nẵng và Bộ Giáo dục & Đào tạo.",
+            "cơ cấu": [
+                "Hội đồng Trường",
+                "Ban Giám hiệu",
+                "Các Phòng, Ban chức năng",
+                "Các Khoa đào tạo",
+                "Viện nghiên cứu và Trung tâm hỗ trợ"
+            ]
+        },
+        "hội đồng trường": {
+            "mô tả": "Hội đồng Trường VKU là cơ quan quản lý cao nhất, quyết định các chiến lược phát triển và chính sách quan trọng của nhà trường.",
+            "chủ tịch": "GS.TS. Nguyễn Hồng Minh",
+            "thành viên": [
+                "Ban Giám hiệu",
+                "Đại diện giảng viên",
+                "Đại diện doanh nghiệp đối tác",
+                "Đại diện sinh viên"
+            ]
+        },
+        "ban giám hiệu": {
+            "mô tả": "Ban Giám hiệu chịu trách nhiệm điều hành các hoạt động của trường, bao gồm quản lý đào tạo, nghiên cứu khoa học và hợp tác doanh nghiệp.",
+            "hiệu trưởng": {
+                "tên": "PGS.TS. Lê Văn Huy",
+                "vai trò": "Hiệu trưởng, phụ trách chung toàn bộ hoạt động của trường."
+            },
+            "phó hiệu trưởng": [
+                {
+                    "tên": "TS. Nguyễn Văn A",
+                    "vai trò": "Phụ trách đào tạo và quản lý sinh viên."
+                },
+                {
+                    "tên": "TS. Trần Thị B",
+                    "vai trò": "Phụ trách nghiên cứu khoa học và hợp tác quốc tế."
+                }
+            ]
+        },
+        "các khoa và trung tâm": {
+            "khoa đào tạo": [
+                {
+                    "tên": "Khoa Công nghệ Thông tin",
+                    "mô tả": "Đào tạo các ngành Công nghệ Thông tin, Khoa học dữ liệu, Trí tuệ nhân tạo."
+                },
+                {
+                    "tên": "Khoa Kỹ thuật Máy tính",
+                    "mô tả": "Đào tạo các ngành liên quan đến Kỹ thuật Máy tính, IoT và An toàn thông tin."
+                },
+                {
+                    "tên": "Khoa Quản trị số",
+                    "mô tả": "Đào tạo các chuyên ngành Quản trị kinh doanh số, Marketing kỹ thuật số."
+                }
+            ],
+            "viện nghiên cứu và trung tâm": [
+                {
+                    "tên": "Viện nghiên cứu Công nghệ số",
+                    "mô tả": "Thực hiện nghiên cứu trong lĩnh vực AI, Blockchain, Big Data."
+                },
+                {
+                    "tên": "Trung tâm Đào tạo và Phát triển phần mềm",
+                    "mô tả": "Cung cấp các khóa đào tạo thực hành và hợp tác với doanh nghiệp phần mềm."
+                },
+                {
+                    "tên": "Trung tâm Hỗ trợ sinh viên & Khởi nghiệp",
+                    "mô tả": "Hỗ trợ sinh viên trong việc thực tập, khởi nghiệp và tìm kiếm việc làm."
+                }
+            ]
+        }
+    },
+    "cơ sở vật chất": {
+        "tổng quan": {
+            "mô tả": "Trường VKU được xây dựng theo mô hình đại học hiện đại, với cơ sở hạ tầng tiên tiến phục vụ giảng dạy, nghiên cứu và sinh hoạt của sinh viên.",
+            "diện tích": "Hơn 20 hecta",
+            "vị trí": "Khu Đô thị Đại học, P. Hòa Quý, Q. Ngũ Hành Sơn, TP. Đà Nẵng"
+        },
+        "các khu vực chính": [
+            {
+                "tên": "Giảng đường",
+                "mô tả": "Hệ thống giảng đường được trang bị hiện đại, có máy chiếu, điều hòa, internet tốc độ cao."
+            },
+            {
+                "tên": "Thư viện",
+                "mô tả": "Thư viện điện tử với hàng nghìn đầu sách, tài liệu nghiên cứu, khu vực học nhóm và tự học."
+            },
+            {
+                "tên": "Phòng thí nghiệm",
+                "mô tả": "Bao gồm các phòng thí nghiệm AI, IoT, An ninh mạng, giúp sinh viên thực hành và nghiên cứu chuyên sâu."
+            },
+            {
+                "tên": "Trung tâm dữ liệu & máy chủ",
+                "mô tả": "Hệ thống máy chủ mạnh mẽ phục vụ đào tạo về Cloud Computing, Big Data và AI."
+            },
+            {
+                "tên": "Ký túc xá",
+                "mô tả": "Khu ký túc xá hiện đại, đáp ứng nhu cầu chỗ ở cho hơn 1.000 sinh viên."
+            },
+            {
+                "tên": "Khu thể thao",
+                "mô tả": "Bao gồm sân bóng đá, sân bóng rổ, phòng gym giúp sinh viên rèn luyện thể chất."
+            },
+            {
+                "tên": "Canteen và khu sinh hoạt chung",
+                "mô tả": "Canteen phục vụ đa dạng món ăn, có khu vực sinh hoạt chung cho sinh viên."
+            }
+        ],
+        "ứng dụng công nghệ": {
+            "mô tả": "VKU áp dụng công nghệ hiện đại vào quản lý và giảng dạy, giúp sinh viên tiếp cận với các công nghệ mới nhất.",
+            "hệ thống": [
+                {
+                    "tên": "Hệ thống e-learning",
+                    "mô tả": "Sinh viên có thể học trực tuyến, truy cập tài liệu và làm bài kiểm tra qua hệ thống LMS của trường."
+                },
+                {
+                    "tên": "Hệ thống quản lý sinh viên",
+                    "mô tả": "Giúp sinh viên đăng ký học phần, tra cứu điểm số, nhận thông báo từ nhà trường."
+                },
+                {
+                    "tên": "Phòng Lab thực tế ảo",
+                    "mô tả": "Ứng dụng VR/AR trong đào tạo giúp sinh viên có trải nghiệm học tập thực tế hơn."
+                }
+            ]
+        }
+    },
+    "hoạt động đào tạo": {
+        "mô hình đào tạo": {
+            "mô tả": "VKU áp dụng mô hình đào tạo linh hoạt theo hệ thống tín chỉ, giúp sinh viên chủ động trong việc học tập.",
+            "đặc điểm": [
+                "Hệ thống tín chỉ, cho phép sinh viên tự do đăng ký môn học theo lộ trình cá nhân.",
+                "Kết hợp giữa lý thuyết và thực hành, đào tạo theo nhu cầu thực tế của doanh nghiệp.",
+                "Chương trình đào tạo được cập nhật thường xuyên để bắt kịp xu hướng công nghệ.",
+                "Hỗ trợ học tập trực tuyến thông qua hệ thống e-learning và thư viện số."
+            ]
+        },
+        "chương trình đào tạo": [
+            {
+                "bậc đào tạo": "Đại học",
+                "mô tả": "Chương trình đào tạo kéo dài từ 3.5 - 4.5 năm, bao gồm các ngành công nghệ thông tin, kỹ thuật máy tính, quản trị số.",
+                "yêu cầu tốt nghiệp": {
+                    "tổng số tín chỉ": 140,
+                    "chuẩn đầu ra": [
+                        "Đạt chuẩn tiếng Anh tối thiểu (IELTS 5.5 hoặc TOEIC 600).",
+                        "Hoàn thành kỳ thực tập tại doanh nghiệp.",
+                        "Thực hiện đồ án tốt nghiệp theo chuẩn doanh nghiệp hoặc nghiên cứu khoa học."
+                    ]
+                }
+            },
+            {
+                "bậc đào tạo": "Sau đại học",
+                "mô tả": "VKU cung cấp các chương trình thạc sĩ trong lĩnh vực công nghệ thông tin và quản trị kinh doanh số.",
+                "các ngành": [
+                    "Thạc sĩ Công nghệ thông tin",
+                    "Thạc sĩ Khoa học dữ liệu",
+                    "Thạc sĩ Quản trị kinh doanh số"
+                ]
+            }
+        ],
+        "phương pháp giảng dạy": {
+            "mô tả": "Trường áp dụng các phương pháp giảng dạy tiên tiến nhằm nâng cao hiệu quả học tập.",
+            "phương pháp": [
+                {
+                    "tên": "Dạy học dựa trên dự án (PBL - Project-Based Learning)",
+                    "mô tả": "Sinh viên thực hiện các dự án thực tế, phát triển kỹ năng giải quyết vấn đề và làm việc nhóm."
+                },
+                {
+                    "tên": "Đào tạo theo định hướng doanh nghiệp",
+                    "mô tả": "Kết hợp giảng viên doanh nghiệp, thực tập thực tế và xây dựng chương trình phù hợp với nhu cầu thị trường."
+                },
+                {
+                    "tên": "Ứng dụng công nghệ số trong giảng dạy",
+                    "mô tả": "Sử dụng e-learning, AI tutor và phòng lab thực tế ảo để hỗ trợ giảng dạy."
+                }
+            ]
+        }
+    },
+    "nghiên cứu khoa học và hợp tác quốc tế": {
+        "nghiên cứu khoa học": {
+            "mô tả": "VKU đẩy mạnh nghiên cứu khoa học với nhiều đề tài mang tính ứng dụng cao, góp phần vào sự phát triển của nền kinh tế số.",
+            "các hướng nghiên cứu chính": [
+                "Trí tuệ nhân tạo và ứng dụng trong xử lý ngôn ngữ tự nhiên, thị giác máy tính.",
+                "An toàn thông tin và bảo mật dữ liệu.",
+                "Internet vạn vật (IoT) và ứng dụng trong thành phố thông minh.",
+                "Blockchain và tài chính số.",
+                "Phát triển phần mềm và kỹ thuật lập trình hiện đại."
+            ],
+            "chương trình hỗ trợ": [
+                {
+                    "tên": "Quỹ tài trợ nghiên cứu VKU",
+                    "mô tả": "Hỗ trợ tài chính cho giảng viên, sinh viên thực hiện các dự án nghiên cứu."
+                },
+                {
+                    "tên": "Chương trình nghiên cứu sinh viên",
+                    "mô tả": "Sinh viên có thể tham gia vào các nhóm nghiên cứu khoa học ngay từ năm nhất."
+                },
+                {
+                    "tên": "Hợp tác nghiên cứu với doanh nghiệp",
+                    "mô tả": "Trường hợp tác với các doanh nghiệp để triển khai nghiên cứu ứng dụng thực tế."
+                }
+            ]
+        },
+        "hợp tác quốc tế": {
+            "mô tả": "VKU có quan hệ hợp tác với nhiều trường đại học và tổ chức quốc tế, tạo điều kiện cho sinh viên và giảng viên tiếp cận nền giáo dục tiên tiến.",
+            "chương trình hợp tác": [
+                {
+                    "tên": "Chương trình trao đổi sinh viên quốc tế",
+                    "mô tả": "Sinh viên có cơ hội học tập từ 1-2 học kỳ tại các trường đại học đối tác."
+                },
+                {
+                    "tên": "Chương trình liên kết đào tạo 2+2, 3+1",
+                    "mô tả": "Sinh viên học 2-3 năm tại VKU, sau đó chuyển tiếp sang đại học quốc tế để hoàn thành chương trình."
+                },
+                {
+                    "tên": "Hội thảo và sự kiện học thuật quốc tế",
+                    "mô tả": "Trường thường xuyên tổ chức các hội thảo chuyên ngành với sự tham gia của các chuyên gia quốc tế."
+                }
+            ],
+            "đối tác quốc tế": [
+                {
+                    "tên": "Đại học Quốc gia Seoul (Hàn Quốc)",
+                    "mô tả": "Hợp tác đào tạo và nghiên cứu trong lĩnh vực trí tuệ nhân tạo."
+                },
+                {
+                    "tên": "Đại học Công nghệ Nanyang (Singapore)",
+                    "mô tả": "Chương trình trao đổi sinh viên và nghiên cứu chung về khoa học dữ liệu."
+                },
+                {
+                    "tên": "Đại học Osaka (Nhật Bản)",
+                    "mô tả": "Hợp tác đào tạo về an toàn thông tin và blockchain."
+                },
+                {
+                    "tên": "Đại học Arizona State (Mỹ)",
+                    "mô tả": "Chương trình đào tạo song bằng trong lĩnh vực kỹ thuật phần mềm."
+                }
+            ]
+        }
+    },
+    "hỗ trợ sinh viên và đời sống học đường": {
+        "chính sách hỗ trợ": {
+            "mô tả": "VKU cung cấp nhiều chính sách hỗ trợ sinh viên trong học tập, tài chính và việc làm để giúp sinh viên phát triển toàn diện.",
+            "các chính sách": [
+                {
+                    "tên": "Hỗ trợ tài chính và học bổng",
+                    "mô tả": "Sinh viên có hoàn cảnh khó khăn có thể nhận học bổng hoặc hỗ trợ tài chính từ trường và các tổ chức doanh nghiệp."
+                },
+                {
+                    "tên": "Hỗ trợ việc làm",
+                    "mô tả": "Trường kết nối với các doanh nghiệp để hỗ trợ sinh viên tìm kiếm việc làm thêm và việc làm sau tốt nghiệp."
+                },
+                {
+                    "tên": "Hỗ trợ tâm lý và tư vấn học đường",
+                    "mô tả": "Cung cấp dịch vụ tư vấn giúp sinh viên giải quyết các vấn đề cá nhân, học tập và định hướng nghề nghiệp."
+                },
+                {
+                    "tên": "Hỗ trợ nhà ở và ký túc xá",
+                    "mô tả": "Sinh viên có thể đăng ký ký túc xá hoặc được hỗ trợ tìm kiếm nhà trọ gần trường với mức giá hợp lý."
+                }
+            ]
+        },
+        "đời sống sinh viên": {
+            "hoạt động ngoại khóa": [
+                {
+                    "tên": "Câu lạc bộ Công nghệ Thông tin",
+                    "mô tả": "Tổ chức các buổi hackathon, seminar về AI, IoT, Blockchain giúp sinh viên nâng cao kỹ năng chuyên môn."
+                },
+                {
+                    "tên": "Câu lạc bộ Khởi nghiệp",
+                    "mô tả": "Hỗ trợ sinh viên phát triển ý tưởng kinh doanh, tham gia cuộc thi khởi nghiệp và kết nối với doanh nghiệp."
+                },
+                {
+                    "tên": "Câu lạc bộ Nghệ thuật & Truyền thông",
+                    "mô tả": "Tạo không gian cho sinh viên yêu thích âm nhạc, nhảy, nhiếp ảnh và sáng tạo nội dung."
+                },
+                {
+                    "tên": "Câu lạc bộ Thể thao",
+                    "mô tả": "Các đội bóng đá, bóng chuyền, cầu lông giúp sinh viên rèn luyện thể chất và giao lưu với các trường khác."
+                }
+            ],
+            "sự kiện sinh viên": [
+                {
+                    "tên": "Ngày hội Sinh viên VKU",
+                    "mô tả": "Sự kiện thường niên với nhiều hoạt động thể thao, văn hóa và hội thảo chuyên ngành."
+                },
+                {
+                    "tên": "Cuộc thi Hackathon VKU",
+                    "mô tả": "Sinh viên tham gia lập trình giải quyết bài toán thực tế trong 24-48 giờ."
+                },
+                {
+                    "tên": "Chương trình Giao lưu Quốc tế",
+                    "mô tả": "Cơ hội để sinh viên kết nối với sinh viên quốc tế thông qua các hoạt động văn hóa và học thuật."
+                }
+            ]
+        }
+    },
+    "cơ hội nghề nghiệp và kết nối doanh nghiệp": {
+        "cơ hội nghề nghiệp": {
+            "mô tả": "VKU cam kết đào tạo nguồn nhân lực chất lượng cao, đảm bảo sinh viên có việc làm ngay sau khi tốt nghiệp.",
+            "tỷ lệ việc làm": "Hơn 95% sinh viên có việc làm trong vòng 6 tháng sau tốt nghiệp.",
+            "các ngành có việc làm cao": [
+                {
+                    "ngành": "Công nghệ thông tin",
+                    "cơ hội": [
+                        "Lập trình viên phần mềm",
+                        "Kỹ sư dữ liệu",
+                        "Chuyên viên an ninh mạng",
+                        "Chuyên viên DevOps"
+                    ]
+                },
+                {
+                    "ngành": "Quản trị kinh doanh số",
+                    "cơ hội": [
+                        "Chuyên viên marketing kỹ thuật số",
+                        "Quản lý chuỗi cung ứng",
+                        "Chuyên viên phân tích tài chính",
+                        "Chuyên viên kinh doanh quốc tế"
+                    ]
+                },
+                {
+                    "ngành": "Trí tuệ nhân tạo & Khoa học dữ liệu",
+                    "cơ hội": [
+                        "Kỹ sư trí tuệ nhân tạo",
+                        "Chuyên viên phân tích dữ liệu",
+                        "Chuyên viên học máy (Machine Learning Engineer)"
+                    ]
+                }
+            ]
+        },
+        "chương trình kết nối doanh nghiệp": {
+            "mô tả": "VKU hợp tác với hơn 50 doanh nghiệp lớn trong và ngoài nước, mang đến nhiều cơ hội nghề nghiệp và thực tập cho sinh viên.",
+            "các chương trình": [
+                {
+                    "tên": "Chương trình thực tập doanh nghiệp",
+                    "mô tả": "Sinh viên có thể tham gia thực tập tại các công ty công nghệ ngay từ năm 3."
+                },
+                {
+                    "tên": "Hội thảo nghề nghiệp",
+                    "mô tả": "Các chuyên gia đến từ doanh nghiệp chia sẻ kinh nghiệm và định hướng nghề nghiệp cho sinh viên."
+                },
+                {
+                    "tên": "Ngày hội việc làm VKU",
+                    "mô tả": "Doanh nghiệp trực tiếp tuyển dụng sinh viên ngay tại trường."
+                }
+            ],
+            "đối tác doanh nghiệp": [
+                {
+                    "tên": "FPT Software",
+                    "mô tả": "Hợp tác đào tạo, cung cấp học bổng và tuyển dụng sinh viên VKU."
+                },
+                {
+                    "tên": "Samsung R&D Vietnam",
+                    "mô tả": "Tạo cơ hội thực tập và việc làm cho sinh viên ngành AI và khoa học dữ liệu."
+                },
+                {
+                    "tên": "VNPT",
+                    "mô tả": "Hợp tác trong lĩnh vực viễn thông và an toàn thông tin."
+                },
+                {
+                    "tên": "VNG Corporation",
+                    "mô tả": "Hỗ trợ sinh viên VKU trong phát triển ứng dụng và game."
+                }
+            ]
+        }
+    },
+    "quan hệ đối tác và hợp tác chiến lược": {
+        "đối tác trong nước": {
+            "mô tả": "VKU hợp tác với nhiều tổ chức, doanh nghiệp trong nước nhằm nâng cao chất lượng đào tạo và nghiên cứu.",
+            "các đối tác": [
+                {
+                    "tên": "Đại học Quốc gia Hà Nội",
+                    "mô tả": "Hợp tác nghiên cứu và trao đổi giảng viên, sinh viên."
+                },
+                {
+                    "tên": "Tập đoàn FPT",
+                    "mô tả": "Hợp tác đào tạo, cung cấp học bổng và cơ hội thực tập cho sinh viên VKU."
+                },
+                {
+                    "tên": "Tập đoàn VNPT",
+                    "mô tả": "Hỗ trợ sinh viên thực tập và nghiên cứu trong lĩnh vực viễn thông và an toàn thông tin."
+                },
+                {
+                    "tên": "Công ty Cổ phần MISA",
+                    "mô tả": "Hợp tác nghiên cứu, phát triển phần mềm và cung cấp cơ hội việc làm."
+                }
+            ]
+        },
+        "đối tác quốc tế": {
+            "mô tả": "VKU mở rộng hợp tác quốc tế nhằm đưa sinh viên và giảng viên tiếp cận với nền giáo dục tiên tiến.",
+            "các đối tác": [
+                {
+                    "tên": "Đại học Quốc gia Seoul (Hàn Quốc)",
+                    "mô tả": "Hợp tác đào tạo trong lĩnh vực trí tuệ nhân tạo và khoa học dữ liệu."
+                },
+                {
+                    "tên": "Đại học Công nghệ Nanyang (Singapore)",
+                    "mô tả": "Chương trình trao đổi sinh viên và nghiên cứu chung về công nghệ số."
+                },
+                {
+                    "tên": "Đại học Osaka (Nhật Bản)",
+                    "mô tả": "Hợp tác nghiên cứu và đào tạo về blockchain và an toàn thông tin."
+                },
+                {
+                    "tên": "Đại học Arizona State (Mỹ)",
+                    "mô tả": "Chương trình đào tạo song bằng và các dự án nghiên cứu AI."
+                }
+            ]
+        },
+        "chương trình hợp tác": {
+            "mô tả": "VKU triển khai nhiều chương trình hợp tác giáo dục và nghiên cứu nhằm tăng cường sự kết nối giữa trường và các đối tác.",
+            "các chương trình": [
+                {
+                    "tên": "Chương trình trao đổi sinh viên quốc tế",
+                    "mô tả": "Sinh viên VKU có thể học 1-2 học kỳ tại các trường đại học đối tác quốc tế."
+                },
+                {
+                    "tên": "Chương trình liên kết đào tạo 2+2, 3+1",
+                    "mô tả": "Sinh viên học 2-3 năm tại VKU, sau đó chuyển tiếp sang đại học quốc tế để hoàn thành chương trình."
+                },
+                {
+                    "tên": "Hội thảo khoa học và công nghệ quốc tế",
+                    "mô tả": "VKU tổ chức các hội thảo chuyên ngành với sự tham gia của các chuyên gia và nhà nghiên cứu quốc tế."
+                },
+                {
+                    "tên": "Chương trình nghiên cứu chung với doanh nghiệp",
+                    "mô tả": "Sinh viên và giảng viên VKU có thể tham gia vào các dự án nghiên cứu thực tế với doanh nghiệp trong nước và quốc tế."
+                }
+            ]
+        }
+    },
+    "định hướng phát triển trong tương lai": {
+        "tầm nhìn đến năm 2030": {
+            "mô tả": "VKU đặt mục tiêu trở thành một trong những trường đại học hàng đầu tại Việt Nam về công nghệ thông tin, truyền thông và kinh tế số.",
+            "các mục tiêu": [
+                "Xây dựng VKU thành trung tâm đào tạo và nghiên cứu hàng đầu về công nghệ số.",
+                "Mở rộng hợp tác quốc tế với các trường đại học và tổ chức nghiên cứu lớn.",
+                "Ứng dụng mạnh mẽ công nghệ số vào giảng dạy và quản lý giáo dục.",
+                "Phát triển hệ sinh thái khởi nghiệp và đổi mới sáng tạo trong sinh viên.",
+                "Nâng cao chất lượng giảng viên, phấn đấu đạt tỷ lệ trên 50% giảng viên có trình độ tiến sĩ."
+            ]
+        },
+        "chiến lược phát triển": {
+            "mô tả": "VKU sẽ tập trung vào 3 trụ cột chính để phát triển bền vững trong tương lai.",
+            "trọng tâm": [
+                {
+                    "tên": "Đổi mới chương trình đào tạo",
+                    "mô tả": "Cập nhật chương trình giảng dạy theo xu hướng công nghệ và nhu cầu thị trường lao động."
+                },
+                {
+                    "tên": "Tăng cường nghiên cứu khoa học",
+                    "mô tả": "Đẩy mạnh nghiên cứu ứng dụng trong các lĩnh vực AI, IoT, blockchain, khoa học dữ liệu."
+                },
+                {
+                    "tên": "Phát triển quan hệ doanh nghiệp",
+                    "mô tả": "Hợp tác sâu rộng với doanh nghiệp để đào tạo thực tế và nâng cao cơ hội việc làm cho sinh viên."
+                }
+            ]
+        },
+        "mở rộng và nâng cấp cơ sở vật chất": {
+            "mô tả": "VKU sẽ đầu tư vào cơ sở vật chất hiện đại, phục vụ cho việc giảng dạy, nghiên cứu và đời sống sinh viên.",
+            "các dự án chính": [
+                {
+                    "tên": "Xây dựng khu giảng đường thông minh",
+                    "mô tả": "Hệ thống phòng học hiện đại, trang bị công nghệ thực tế ảo (VR/AR) phục vụ giảng dạy."
+                },
+                {
+                    "tên": "Phát triển trung tâm dữ liệu và trí tuệ nhân tạo",
+                    "mô tả": "Xây dựng trung tâm nghiên cứu AI với hệ thống máy chủ hiệu năng cao."
+                },
+                {
+                    "tên": "Mở rộng ký túc xá sinh viên",
+                    "mô tả": "Tăng sức chứa ký túc xá để đáp ứng nhu cầu chỗ ở của sinh viên."
+                }
+            ]
+        }
+    },
+    "cam kết và trách nhiệm xã hội": {
+        "cam kết về chất lượng đào tạo": {
+            "mô tả": "VKU cam kết mang đến chương trình đào tạo chất lượng cao, đáp ứng nhu cầu thực tế của thị trường lao động và xu hướng công nghệ hiện đại.",
+            "các tiêu chí": [
+                "Chương trình đào tạo được thiết kế theo chuẩn quốc tế, cập nhật liên tục theo xu hướng công nghệ.",
+                "Đội ngũ giảng viên trình độ cao, giàu kinh nghiệm trong giảng dạy và nghiên cứu.",
+                "Tích hợp công nghệ số vào quá trình dạy và học, hỗ trợ học tập trực tuyến hiệu quả.",
+                "Liên kết chặt chẽ với doanh nghiệp để đảm bảo cơ hội việc làm cho sinh viên ngay sau khi tốt nghiệp."
+            ]
+        },
+        "hoạt động cộng đồng và tình nguyện": {
+            "mô tả": "VKU không chỉ tập trung vào đào tạo mà còn có nhiều hoạt động hướng đến cộng đồng, thể hiện trách nhiệm xã hội.",
+            "các chương trình": [
+                {
+                    "tên": "Chiến dịch Mùa hè xanh",
+                    "mô tả": "Sinh viên tham gia tình nguyện hỗ trợ các địa phương khó khăn, phát triển giáo dục và môi trường."
+                },
+                {
+                    "tên": "Chương trình Hiến máu nhân đạo",
+                    "mô tả": "VKU phối hợp với Hội Chữ thập đỏ tổ chức các đợt hiến máu cứu người hàng năm."
+                },
+                {
+                    "tên": "Dự án hỗ trợ giáo dục vùng sâu vùng xa",
+                    "mô tả": "Hỗ trợ trang thiết bị học tập, hướng dẫn kỹ năng công nghệ cho học sinh tại các khu vực khó khăn."
+                }
+            ]
+        },
+        "chính sách hỗ trợ xã hội": {
+            "mô tả": "VKU có nhiều chính sách hỗ trợ dành cho sinh viên có hoàn cảnh đặc biệt, giúp các em có cơ hội học tập tốt hơn.",
+            "các chính sách": [
+                {
+                    "tên": "Học bổng dành cho sinh viên nghèo vượt khó",
+                    "mô tả": "Cung cấp học bổng toàn phần hoặc bán phần cho sinh viên có thành tích học tập xuất sắc dù gặp khó khăn tài chính."
+                },
+                {
+                    "tên": "Miễn giảm học phí cho sinh viên diện chính sách",
+                    "mô tả": "Sinh viên thuộc diện hộ nghèo, con em gia đình chính sách được miễn giảm học phí theo quy định."
+                },
+                {
+                    "tên": "Chương trình hỗ trợ việc làm bán thời gian",
+                    "mô tả": "Sinh viên có thể tham gia các công việc bán thời gian tại trường hoặc kết nối với doanh nghiệp để tăng thu nhập và tích lũy kinh nghiệm."
+                }
+            ]
+        }
+    },
+    "nội quy ký túc xá": {
+        "quy định chung": {
+            "mô tả": "Sinh viên nội trú phải tuân thủ các quy định về nếp sống, an ninh trật tự, bảo vệ tài sản và vệ sinh môi trường trong khu ký túc xá.",
+            "quy định": [
+                "Chấp hành sự sắp xếp, bố trí chỗ ở của Tổ quản lý Ký túc xá.",
+                "Chấp hành nghiêm túc các quy định về nề nếp sinh hoạt, sử dụng cơ sở vật chất, an ninh trật tự, vệ sinh môi trường.",
+                "Tham gia tích cực các hoạt động tự quản, văn hóa, thể thao do ký túc xá tổ chức.",
+                "Nộp các khoản lệ phí KTX, điện nước đúng quy định.",
+                "Thực hiện ra vào KTX đúng thời gian quy định từ 05h00 đến 23h00."
+            ]
+        },
+        "nếp sinh hoạt": {
+            "mô tả": "Sinh viên cần giữ gìn trật tự, vệ sinh chung và tuân thủ các quy định về sinh hoạt trong KTX.",
+            "quy định": [
+                "Không gây tiếng ồn ảnh hưởng đến bạn cùng phòng và các phòng khác.",
+                "Sử dụng điện nước an toàn, tiết kiệm.",
+                "Không chơi thể thao trong phòng ở, hành lang, ban công.",
+                "Trang phục gọn gàng, lịch sự, kín đáo.",
+                "Tuân thủ các quy định về an toàn phòng cháy chữa cháy."
+            ]
+        },
+        "sử dụng cơ sở vật chất": {
+            "mô tả": "Sinh viên có trách nhiệm bảo vệ tài sản chung, sử dụng hợp lý cơ sở vật chất trong KTX.",
+            "quy định": [
+                "Không sử dụng thiết bị đun nấu hoặc đưa đồ dùng đun nấu vào phòng KTX.",
+                "Không sử dụng tủ lạnh trong phòng KTX.",
+                "Không làm thay đổi kết cấu ban đầu hoặc tự ý gắn thêm thiết bị.",
+                "Không dán băng rôn, biểu ngữ, quảng cáo hoặc vẽ, viết lên tường, trần nhà.",
+                "Không che chắn phòng ở, giường ngủ làm mất mỹ quan."
+            ]
+        },
+        "an ninh trật tự": {
+            "mô tả": "Ký túc xá có các quy định chặt chẽ về an ninh trật tự nhằm đảm bảo môi trường sống an toàn cho sinh viên.",
+            "quy định": [
+                "Không lôi kéo, tụ tập, không đưa người ngoài vào trong khu KTX.",
+                "Không tàng trữ, trao đổi, mua bán, sử dụng các loại hung khí, chất dễ cháy nổ, chất kích thích, gây nghiện.",
+                "Không gây gổ, kích động, tham gia đánh nhau hoặc tổ chức đánh nhau.",
+                "Không tổ chức hoặc tham gia uống rượu bia, đánh bài, cờ bạc.",
+                "Không chứa chấp, che giấu tội phạm, hàng quốc cấm."
+            ]
+        },
+        "vệ sinh môi trường": {
+            "mô tả": "Sinh viên có trách nhiệm giữ gìn vệ sinh chung, thực hiện đúng các quy định về xử lý rác thải.",
+            "quy định": [
+                "Giữ gìn vệ sinh phòng ở, hành lang, cầu thang và khuôn viên KTX.",
+                "Không nuôi gia súc, gia cầm trong KTX.",
+                "Đổ rác đúng nơi quy định và đúng thời gian từ 18h00 đến 07h00."
+            ]
+        }
+    },
+    "quy chế học tập": {
+        "quy định chung": {
+            "mô tả": "Sinh viên cần tuân thủ các quy định về học tập để đảm bảo chất lượng đào tạo và tiến độ tốt nghiệp.",
+            "quy định": [
+                "Tham gia đầy đủ các buổi học theo thời khóa biểu.",
+                "Không đi muộn, nghỉ học không có lý do chính đáng.",
+                "Hoàn thành đầy đủ bài tập, bài kiểm tra theo yêu cầu của giảng viên.",
+                "Không gian lận trong thi cử, bài tập, báo cáo.",
+                "Thực hiện đúng quy chế khi đăng ký môn học, bảo lưu hoặc rút môn."
+            ]
+        },
+        "quy định đăng ký học phần": {
+            "mô tả": "Quy trình đăng ký học phần giúp sinh viên chủ động xây dựng lộ trình học tập phù hợp.",
+            "quy định": [
+                "Sinh viên phải đăng ký học phần trong thời gian quy định của từng học kỳ.",
+                "Mỗi học kỳ, sinh viên phải đăng ký tối thiểu 12 tín chỉ và tối đa 25 tín chỉ.",
+                "Sinh viên có thể rút học phần trong thời gian cho phép nhưng phải đảm bảo số tín chỉ tối thiểu.",
+                "Sinh viên không được đăng ký lại học phần đã đạt điểm A hoặc B.",
+                "Đối với học phần bị điểm F, sinh viên bắt buộc phải đăng ký học lại."
+            ]
+        },
+        "quy định thi cử": {
+            "mô tả": "Thi cử là yếu tố quan trọng để đánh giá năng lực học tập của sinh viên, cần tuân thủ nghiêm túc.",
+            "quy định": [
+                "Sinh viên phải có mặt tại phòng thi đúng giờ, mang theo thẻ sinh viên.",
+                "Không mang tài liệu, điện thoại hoặc các thiết bị gian lận vào phòng thi.",
+                "Không trao đổi bài hoặc có hành vi gian lận dưới bất kỳ hình thức nào.",
+                "Sinh viên vi phạm quy chế thi sẽ bị xử lý kỷ luật từ cảnh cáo đến đình chỉ học tập.",
+                "Khi có lý do chính đáng không thể dự thi, sinh viên phải làm đơn xin hoãn thi trước 3 ngày."
+            ]
+        },
+        "tiêu chí đánh giá kết quả học tập": {
+            "mô tả": "VKU áp dụng hệ thống đánh giá kết quả học tập theo thang điểm 10 và chuyển đổi sang thang điểm chữ.",
+            "hệ thống đánh giá": [
+                {
+                    "điểm chữ": "A",
+                    "thang điểm 10": "8.5 - 10",
+                    "xếp loại": "Giỏi"
+                },
+                {
+                    "điểm chữ": "B",
+                    "thang điểm 10": "7.0 - 8.4",
+                    "xếp loại": "Khá"
+                },
+                {
+                    "điểm chữ": "C",
+                    "thang điểm 10": "5.5 - 6.9",
+                    "xếp loại": "Trung bình"
+                },
+                {
+                    "điểm chữ": "D",
+                    "thang điểm 10": "4.0 - 5.4",
+                    "xếp loại": "Trung bình yếu"
+                },
+                {
+                    "điểm chữ": "F",
+                    "thang điểm 10": "Dưới 4.0",
+                    "xếp loại": "Không đạt"
+                }
+            ]
+        }
+    },
+    "quy chế khen thưởng và kỷ luật": {
+        "khen thưởng": {
+            "mô tả": "Sinh viên có thành tích học tập, nghiên cứu hoặc đóng góp xuất sắc cho nhà trường sẽ được khen thưởng.",
+            "các hình thức khen thưởng": [
+                {
+                    "tên": "Học bổng khuyến khích học tập",
+                    "mô tả": "Dành cho sinh viên đạt điểm GPA từ 3.6/4.0 trở lên trong mỗi học kỳ."
+                },
+                {
+                    "tên": "Giấy khen của Hiệu trưởng",
+                    "mô tả": "Tặng cho sinh viên có thành tích xuất sắc trong học tập, nghiên cứu khoa học hoặc hoạt động phong trào."
+                },
+                {
+                    "tên": "Khen thưởng nghiên cứu khoa học",
+                    "mô tả": "Dành cho sinh viên đạt giải trong các cuộc thi nghiên cứu khoa học cấp trường, quốc gia và quốc tế."
+                },
+                {
+                    "tên": "Khen thưởng hoạt động ngoại khóa",
+                    "mô tả": "Tặng cho sinh viên có đóng góp tích cực trong các hoạt động tình nguyện, thể thao, văn hóa nghệ thuật."
+                }
+            ]
+        },
+        "kỷ luật": {
+            "mô tả": "Sinh viên vi phạm nội quy, quy chế của trường sẽ bị xử lý kỷ luật theo từng cấp độ.",
+            "các mức độ kỷ luật": [
+                {
+                    "cấp độ": "Nhắc nhở",
+                    "mô tả": "Áp dụng với các lỗi nhẹ như đi học muộn, không giữ vệ sinh chung."
+                },
+                {
+                    "cấp độ": "Cảnh cáo",
+                    "mô tả": "Áp dụng với các vi phạm nghiêm trọng hơn như vắng học quá số buổi quy định, vi phạm quy chế thi."
+                },
+                {
+                    "cấp độ": "Đình chỉ học tập có thời hạn",
+                    "mô tả": "Áp dụng với sinh viên có hành vi gian lận thi cử, gây mất trật tự nghiêm trọng trong trường."
+                },
+                {
+                    "cấp độ": "Buộc thôi học",
+                    "mô tả": "Áp dụng với sinh viên vi phạm nghiêm trọng các quy định về đạo đức, pháp luật, hoặc tái phạm nhiều lần."
+                }
+            ]
+        }
+    },
+    "quy định tài chính và học phí": {
+        "nguyên tắc chung": {
+            "mô tả": "Sinh viên có trách nhiệm đóng học phí đầy đủ và đúng hạn theo quy định của nhà trường.",
+            "quy định": [
+                "Học phí được tính theo tín chỉ đối với hệ đại học chính quy.",
+                "Mức học phí có thể điều chỉnh hàng năm theo quy định của Bộ Giáo dục & Đào tạo.",
+                "Sinh viên phải hoàn thành học phí trước thời hạn quy định mỗi học kỳ.",
+                "Sinh viên chậm đóng học phí sẽ bị xử lý theo quy chế tài chính của trường.",
+                "Các khoản phí khác như phí thư viện, ký túc xá, bảo hiểm y tế cũng cần được đóng đầy đủ."
+            ]
+        },
+        "các mức phí": {
+            "mô tả": "Danh sách các khoản phí áp dụng cho sinh viên theo từng chương trình đào tạo.",
+            "mức học phí": [
+                {
+                    "chương trình": "Đại học chính quy",
+                    "mức phí": "Khoảng 15.000.000 - 25.000.000 VNĐ/năm tùy theo ngành học."
+                },
+                {
+                    "chương trình": "Chất lượng cao",
+                    "mức phí": "Khoảng 30.000.000 - 40.000.000 VNĐ/năm."
+                },
+                {
+                    "chương trình": "Sau đại học",
+                    "mức phí": "Khoảng 25.000.000 - 35.000.000 VNĐ/năm."
+                }
+            ],
+            "các khoản phí khác": [
+                {
+                    "tên": "Phí nhập học",
+                    "mức phí": "Khoảng 1.000.000 VNĐ (đóng một lần khi nhập học)."
+                },
+                {
+                    "tên": "Phí bảo hiểm y tế",
+                    "mức phí": "Khoảng 800.000 VNĐ/năm (bắt buộc theo quy định của Bộ Y tế)."
+                },
+                {
+                    "tên": "Phí ở ký túc xá",
+                    "mức phí": "Khoảng 500.000 - 1.500.000 VNĐ/tháng tùy theo loại phòng."
+                }
+            ]
+        },
+        "chính sách hỗ trợ tài chính": {
+            "mô tả": "Trường có các chính sách hỗ trợ tài chính giúp sinh viên có hoàn cảnh khó khăn tiếp tục học tập.",
+            "các chính sách": [
+                {
+                    "tên": "Miễn giảm học phí",
+                    "mô tả": "Dành cho sinh viên thuộc hộ nghèo, cận nghèo hoặc gia đình chính sách."
+                },
+                {
+                    "tên": "Học bổng hỗ trợ tài chính",
+                    "mô tả": "Cấp cho sinh viên có hoàn cảnh khó khăn nhưng đạt thành tích học tập tốt."
+                },
+                {
+                    "tên": "Chương trình vay vốn sinh viên",
+                    "mô tả": "Hỗ trợ sinh viên vay vốn từ ngân hàng chính sách với lãi suất thấp để trang trải học phí."
+                }
+            ]
+        },
+        "hình thức nộp học phí": {
+            "mô tả": "Sinh viên có thể lựa chọn nhiều hình thức nộp học phí thuận tiện.",
+            "cách thức": [
+                {
+                    "hình thức": "Nộp trực tiếp",
+                    "mô tả": "Nộp tại phòng kế toán tài chính của nhà trường trong giờ hành chính."
+                },
+                {
+                    "hình thức": "Chuyển khoản ngân hàng",
+                    "mô tả": "Chuyển khoản vào tài khoản ngân hàng của trường, ghi rõ nội dung 'Họ tên - Mã sinh viên - Học phí HKx'."
+                },
+                {
+                    "hình thức": "Thanh toán trực tuyến",
+                    "mô tả": "Sử dụng cổng thanh toán online qua website của trường."
+                }
+            ]
+        }
+    },
+    "quy định sử dụng cơ sở vật chất": {
+        "quy định chung": {
+            "mô tả": "Sinh viên có trách nhiệm bảo vệ và sử dụng cơ sở vật chất của trường đúng mục đích, không gây hư hỏng hoặc làm mất tài sản chung.",
+            "quy định": [
+                "Không di chuyển, tháo dỡ trang thiết bị trong giảng đường, phòng thực hành nếu không có sự cho phép.",
+                "Sử dụng điện, nước tiết kiệm, tắt các thiết bị điện khi không sử dụng.",
+                "Giữ gìn vệ sinh chung tại các khu vực học tập, thư viện, phòng thực hành.",
+                "Không vẽ bậy, dán giấy quảng cáo hoặc làm hư hỏng tường, bàn ghế trong khuôn viên trường.",
+                "Không tổ chức các hoạt động tụ tập đông người trong trường nếu chưa được sự đồng ý của nhà trường."
+            ]
+        },
+        "sử dụng giảng đường": {
+            "mô tả": "Giảng đường là nơi học tập chính của sinh viên, cần được sử dụng đúng quy định để đảm bảo môi trường học tập hiệu quả.",
+            "quy định": [
+                "Sinh viên phải có mặt đúng giờ, không gây ồn ào ảnh hưởng đến lớp học.",
+                "Không ăn uống trong giảng đường.",
+                "Không mang vật liệu dễ cháy, nổ vào khu vực giảng đường.",
+                "Không sử dụng giảng đường cho mục đích cá nhân ngoài giờ học nếu chưa được cấp phép."
+            ]
+        },
+        "sử dụng thư viện": {
+            "mô tả": "Thư viện là nơi cung cấp tài liệu học tập và nghiên cứu, sinh viên cần tuân thủ các quy định chung.",
+            "quy định": [
+                "Giữ trật tự trong khu vực thư viện, không gây ồn ào ảnh hưởng đến người khác.",
+                "Không tự ý mang sách, tài liệu ra khỏi thư viện nếu chưa làm thủ tục mượn sách.",
+                "Trả sách đúng hạn theo quy định, không viết vẽ, làm rách hoặc hư hỏng sách.",
+                "Không sử dụng máy tính thư viện vào mục đích cá nhân ngoài học tập và nghiên cứu."
+            ]
+        },
+        "sử dụng phòng thí nghiệm và phòng máy": {
+            "mô tả": "Các phòng thí nghiệm và phòng máy tính phục vụ cho việc thực hành, nghiên cứu khoa học, cần được sử dụng đúng cách.",
+            "quy định": [
+                "Chỉ được sử dụng phòng thí nghiệm, phòng máy khi có lịch học hoặc được sự cho phép của giảng viên.",
+                "Không tự ý cài đặt, xóa phần mềm hoặc thay đổi cấu hình máy tính trong phòng thực hành.",
+                "Không ăn uống, mang nước vào phòng máy và phòng thí nghiệm.",
+                "Không sử dụng thiết bị của phòng thí nghiệm vào mục đích cá nhân."
+            ]
+        },
+        "bảo quản tài sản chung": {
+            "mô tả": "Sinh viên có trách nhiệm bảo vệ tài sản chung của nhà trường, tránh thất thoát, hư hỏng.",
+            "quy định": [
+                "Báo cáo ngay với quản lý khi phát hiện tài sản bị hư hỏng hoặc mất mát.",
+                "Không tự ý sửa chữa hoặc di dời trang thiết bị của nhà trường.",
+                "Trường hợp làm hỏng tài sản chung, sinh viên phải bồi thường theo quy định."
+            ]
+        }
+    },
+    "quy định an toàn an ninh trong trường": {
+        "quy định chung": {
+            "mô tả": "Sinh viên có trách nhiệm tuân thủ các quy định về an toàn và an ninh trong khuôn viên trường để đảm bảo môi trường học tập lành mạnh.",
+            "quy định": [
+                "Không đưa người lạ vào khuôn viên trường mà không có sự cho phép của ban quản lý.",
+                "Không gây rối trật tự công cộng, không tham gia vào các hoạt động gây mất đoàn kết hoặc kích động bạo lực.",
+                "Không mang theo vũ khí, chất dễ cháy nổ, chất cấm vào trường học.",
+                "Không tổ chức hoặc tham gia các hoạt động tuyên truyền trái phép trong khuôn viên trường.",
+                "Báo ngay cho bộ phận an ninh khi phát hiện các hành vi khả nghi, vi phạm an toàn trường học."
+            ]
+        },
+        "quy định phòng cháy chữa cháy": {
+            "mô tả": "Mọi cá nhân trong trường phải tuân thủ nghiêm ngặt các quy định về phòng cháy chữa cháy (PCCC).",
+            "quy định": [
+                "Không hút thuốc, sử dụng lửa trong khu vực cấm như giảng đường, thư viện, ký túc xá.",
+                "Không tự ý sử dụng các thiết bị điện công suất lớn ngoài danh mục cho phép.",
+                "Không che chắn, cản trở lối thoát hiểm và khu vực đặt bình chữa cháy.",
+                "Không vứt rác dễ cháy vào khu vực hành lang, cầu thang, phòng học.",
+                "Tham gia đầy đủ các buổi tập huấn về an toàn phòng cháy chữa cháy do trường tổ chức."
+            ]
+        },
+        "quy định về giao thông nội bộ": {
+            "mô tả": "Sinh viên phải tuân thủ quy định về giao thông trong khuôn viên trường để đảm bảo an toàn cho tất cả mọi người.",
+            "quy định": [
+                "Đi xe đúng phần đường quy định, không phóng nhanh, vượt ẩu trong khuôn viên trường.",
+                "Không sử dụng còi xe hoặc gây tiếng ồn trong khu vực học tập.",
+                "Để xe đúng nơi quy định trong khu vực bãi giữ xe của nhà trường.",
+                "Không đỗ xe trên lối đi bộ, khu vực cổng trường hoặc trước cửa các tòa nhà.",
+                "Tuân thủ hướng dẫn của lực lượng bảo vệ khi tham gia giao thông trong trường."
+            ]
+        },
+        "xử lý vi phạm an ninh": {
+            "mô tả": "Những trường hợp vi phạm về an toàn và an ninh sẽ bị xử lý nghiêm theo quy định của nhà trường.",
+            "hình thức xử lý": [
+                {
+                    "mức độ": "Nhắc nhở",
+                    "mô tả": "Áp dụng với các vi phạm nhỏ như gây ồn ào, không tuân thủ quy định về gửi xe."
+                },
+                {
+                    "mức độ": "Cảnh cáo",
+                    "mô tả": "Áp dụng với hành vi vi phạm nhiều lần hoặc có ảnh hưởng đến trật tự chung."
+                },
+                {
+                    "mức độ": "Kỷ luật nghiêm khắc",
+                    "mô tả": "Đình chỉ học tập hoặc buộc thôi học đối với các vi phạm nghiêm trọng như tàng trữ vũ khí, chất cấm, gây rối trật tự công cộng."
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,8 @@
+GOOGLE_API_KEY="AIzaSyBthSuYk980BLPhEejT0OrMXhJGd9ogNME"
+GOOGLE_Key_2="AIzaSyCA5iz97t1wgvIVi-EWfjmHYlnzR3ykYyo"
+GOOGLE_Key_3="AIzaSyCzUnuDBgRcmw54gldDiFJ2suN8IGWr92E"
+Qdrant_API_KEY="jT8WAGH4ASjA-N7XqCK3c62JXgQk8NFL2nIXfYXwCT5s63HqYz1eGA"
+Qdrant_URL="https://0a664afe-b3d7-45ad-80e3-3af062055000.europe-west3-0.gcp.cloud.qdrant.io:6333"
+NGROK_STATIC_DOMAIN = "https://talented-hen-moral.ngrok-free.app/"
+NGROK_TOKEN="2mvdyNX0wqkpS60yBgDa6pUUKi6_3Jn4yA4rwn9J4D9RpPzWk"
+collection_name="vku_chat_all"
