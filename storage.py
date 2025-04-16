@@ -10,11 +10,14 @@ from sentence_transformers import SentenceTransformer
 from get_context_online import get_online_context
 from config.secretKey import QDRANT_KEY, QDRANT_URL
 
-embedding_model = SentenceTransformer('keepitreal/vietnamese-sbert')
-#embedding_model = SentenceTransformer("bkai-foundation-models/vietnamese-bi-encoder")
+# Initialize embedding model with cached resource to avoid reloading
+@st.cache_resource
+def _load_embedding_model():
+    return SentenceTransformer('keepitreal/vietnamese-sbert')
+
+embedding_model = _load_embedding_model()
 
 class DocumentStore:
-    
     def __init__(self, qdrant_url: str = None, qdrant_api_key: str = None):
         """
         Initialize the document store with Qdrant.
@@ -23,41 +26,44 @@ class DocumentStore:
             qdrant_url (str): URL for the Qdrant service
             qdrant_api_key (str): API key for Qdrant authentication
         """
-        self.qdrant_url = qdrant_url
-        self.qdrant_api_key = qdrant_api_key
+        self.qdrant_url = qdrant_url or QDRANT_URL
+        self.qdrant_api_key = qdrant_api_key or QDRANT_KEY
         
-        # Initialize Qdrant client
+        # Initialize Qdrant client with connection timeout
         self.client = qdrant_client.QdrantClient(
-            url=QDRANT_URL,
-            api_key=QDRANT_KEY
+            url=self.qdrant_url,
+            api_key=self.qdrant_api_key,
+            timeout=30
         )
         
     def get_collection(self, collection_name: str = "vku_document_mul_point_json") -> None:
         """
-        Get or create a Qdrant collection.
+        Get or create a Qdrant collection with optimized configuration.
         
         Args:
             collection_name (str): Name of the collection
         """
         try:
-            # Check if collection exists
             collections = self.client.get_collections().collections
-            collection_names = [collection.name for collection in collections]
-            
-            if collection_name not in collection_names:
-                # Create a new collection with the embedding dimension from the model
-                vector_size = len(embedding_model.encode("test"))
+            if collection_name not in [c.name for c in collections]:
+                vector_size = embedding_model.get_sentence_embedding_dimension()
                 self.client.create_collection(
                     collection_name=collection_name,
                     vectors_config=models.VectorParams(
                         size=vector_size,
-                        distance=models.Distance.COSINE
+                        distance=models.Distance.COSINE,
+                        hnsw_config=models.HnswConfigDiff(
+                            m=16,
+                            ef_construct=100
+                        )
+                    ),
+                    optimizers_config=models.OptimizersConfigDiff(
+                        indexing_threshold=20000
                     )
                 )
                 st.success(f"Created new collection: {collection_name}")
-            
         except Exception as e:
-            st.error(f"Error accessing Qdrant collection: {str(e)}")
+            st.error(f"Failed to access/create collection: {str(e)}")
             raise
     
     def store_document_chunks(
@@ -67,7 +73,7 @@ class DocumentStore:
         collection_name: str = "vku_document_mul_point_json"
     ) -> None:
         """
-        Store document chunks as individual points in Qdrant.
+        Store document chunks as individual points in Qdrant with batch processing.
         
         Args:
             doc_id (str): Unique document identifier
@@ -80,20 +86,13 @@ class DocumentStore:
 
             self.get_collection(collection_name)
             
-            # Store each chunk as a separate point
+            batch_size = 100
             with st.spinner(f"Storing {len(chunks)} chunks..."):
-                batch_size = 100  # Process in batches to avoid memory issues
                 for i in range(0, len(chunks), batch_size):
                     batch_chunks = chunks[i:i + batch_size]
-                    batch_points = []
-                    
-                    for j, chunk in enumerate(batch_chunks):
-                        # Generate a unique ID for each point
-                        point_id = i + j
-                        
-                        # Create point with chunk text and metadata
-                        point = models.PointStruct(
-                            id=point_id,
+                    batch_points = [
+                        models.PointStruct(
+                            id=i + j,
                             vector=embedding_model.encode(chunk).tolist(),
                             payload={
                                 "doc_id": doc_id,
@@ -101,19 +100,43 @@ class DocumentStore:
                                 "chunk_index": i + j
                             }
                         )
-                        batch_points.append(point)
+                        for j, chunk in enumerate(batch_chunks)
+                    ]
                     
-                    # Insert batch of points
                     self.client.upsert(
                         collection_name=collection_name,
-                        points=batch_points
+                        points=batch_points,
+                        wait=True
                     )
             
-            st.success(f"Successfully stored {len(chunks)} chunks for document '{doc_id}'")
+            st.success(f"Stored {len(chunks)} chunks for document '{doc_id}'")
         
         except Exception as e:
-            st.error(f"Error storing document chunks: {str(e)}")
+            st.error(f"Failed to store document chunks: {str(e)}")
             raise
+
+    def _normalize_scores(self, scores: np.ndarray) -> np.ndarray:
+        """
+        Normalize scores to [0,1] range using min-max normalization.
+        
+        Args:
+            scores (np.ndarray): Input scores to normalize
+            
+        Returns:
+            np.ndarray: Normalized scores
+        """
+        if scores.size == 0:
+            return scores
+        if scores.size == 1:
+            return np.array([1.0])
+            
+        score_min = scores.min()
+        score_max = scores.max()
+        
+        if score_max == score_min:
+            return np.ones_like(scores) if score_max != 0 else np.zeros_like(scores)
+            
+        return (scores - score_min) / (score_max - score_min)
 
     def retrieve_relevant_chunks(
         self,
@@ -127,12 +150,21 @@ class DocumentStore:
     ) -> List[str]:
         """
         Retrieve relevant document chunks using hybrid search (Dense + BM25).
+        
+        Args:
+            query (str): User query
+            collection_name (str): Qdrant collection name
+            top_k (int): Number of top documents to retrieve
+            use_hybrid_search (bool): Whether to use hybrid search
+            dense_weight (float): Weight for dense similarity score
+            bm25_weight (float): Weight for BM25 score
+            top_chunks_per_doc (int): Max chunks to return per document
+            
+        Returns:
+            List[str]: Relevant text chunks
         """
         try:
-            # Encode the query for dense search
             query_embedding = embedding_model.encode(query).tolist()
-
-            # Search for relevant points/documents in Qdrant
             search_results = self.client.search(
                 collection_name=collection_name,
                 query_vector=query_embedding,
@@ -141,58 +173,50 @@ class DocumentStore:
             )
 
             relevant_chunks = []
+            tokenized_query = query.split()
 
             for point in search_results:
-                # Check if this is a single-point document with multiple chunks
                 if "chunks" in point.payload:
                     chunks = point.payload["chunks"]
-
                     if use_hybrid_search:
-                        # Hybrid re-ranking: combine dense cosine similarity with BM25 score
                         ranked_chunks = []
-                        tokenized_query = query.split()  # Tokenize query for BM25
-
-                        for chunk in chunks:
-                            # --- Dense Score ---
+                        bm25 = BM25Okapi([c["text"].split() for c in chunks])
+                        bm25_scores = bm25.get_scores(tokenized_query)
+                        
+                        # Normalize BM25 scores
+                        bm25_scores = self._normalize_scores(np.array(bm25_scores))
+                        
+                        for i, chunk in enumerate(chunks):
+                            # Dense score
                             chunk_embedding = np.array(chunk["embedding"])
                             query_emb = np.array(query_embedding)
-                            cosine_sim = np.dot(query_emb, chunk_embedding) / (np.linalg.norm(query_emb) * np.linalg.norm(chunk_embedding) + 1e-8)
-
-                            # --- BM25 Score ---
-                            tokenized_chunk = chunk["text"].split()
-                            bm25 = BM25Okapi([tokenized_chunk])
-                            bm25_score = bm25.get_scores(tokenized_query)[0]
-
-                            # Combine scores (adjust weights)
-                            combined_score = dense_weight * cosine_sim + bm25_weight * bm25_score
+                            cosine_sim = np.dot(query_emb, chunk_embedding) / (
+                                np.linalg.norm(query_emb) * np.linalg.norm(chunk_embedding) + 1e-8
+                            )
+                            
+                            # Combine scores
+                            combined_score = dense_weight * cosine_sim + bm25_weight * bm25_scores[i]
                             ranked_chunks.append((chunk, combined_score))
 
-                        # Sort chunks by combined score (highest first)
                         ranked_chunks = sorted(ranked_chunks, key=lambda x: x[1], reverse=True)
-
-                        # Select top-ranked chunks from this document
-                        top_chunks = ranked_chunks[:top_chunks_per_doc]
-                        relevant_chunks.extend([chunk["text"] for chunk, _ in top_chunks])
+                        relevant_chunks.extend([chunk["text"] for chunk, _ in ranked_chunks[:top_chunks_per_doc]])
                     else:
-                        # If not using hybrid, simply take the first few chunks
                         relevant_chunks.extend([chunk["text"] for chunk in chunks[:top_chunks_per_doc]])
                 else:
-                    # For regular stored (non-grouped) chunks
                     relevant_chunks.append(point.payload["text"])
 
-            return relevant_chunks
+            return relevant_chunks[:top_k * top_chunks_per_doc]
 
         except Exception as e:
-            st.error(f"Error retrieving relevant chunks: {str(e)}")
+            st.error(f"Failed to retrieve relevant chunks: {str(e)}")
             raise
     
     def store_document_as_single_point(
-
-            self, 
-            doc_id: str,
-            chunks: List[str], 
-            collection_name: str = "vku_document_mul_point_json"
-        ) -> None:
+        self, 
+        doc_id: str,
+        chunks: List[str], 
+        collection_name: str = "vku_document_mul_point_json"
+    ) -> None:
         """
         Store all chunks of a document in a single Qdrant point.
         
@@ -208,25 +232,18 @@ class DocumentStore:
             self.get_collection(collection_name)
             
             with st.spinner(f"Processing document with {len(chunks)} chunks..."):
-                # Generate embeddings for all chunks
-                chunk_embeddings = []
-                for chunk in chunks:
-                    embedding = embedding_model.encode(chunk).tolist()
-                    chunk_embeddings.append({
-                        "text": chunk,
-                        "embedding": embedding
-                    })
+                chunk_embeddings = [
+                    {"text": chunk, "embedding": embedding_model.encode(chunk).tolist()}
+                    for chunk in chunks
+                ]
                 
-                # Create a representative embedding for the document
-                # Option 1: Use the first chunk's embedding
-                doc_embedding = chunk_embeddings[0]["embedding"]
+                # Use centroid of chunk embeddings for document representation
+                doc_embedding = np.mean(
+                    [np.array(chunk["embedding"]) for chunk in chunk_embeddings], axis=0
+                ).tolist()
                 
-                # Option 2 (alternative): Average all chunk embeddings
-                # doc_embedding = np.mean([np.array(chunk["embedding"]) for chunk in chunk_embeddings], axis=0).tolist()
-                
-                # Store document as a single point
                 point = models.PointStruct(
-                    id=int(uuid.uuid4().int % (2**63 - 1)),  # Convert UUID to positive integer
+                    id=int(uuid.uuid4().int & (2**63 - 1)),
                     vector=doc_embedding,
                     payload={
                         "doc_id": doc_id,
@@ -235,32 +252,31 @@ class DocumentStore:
                     }
                 )
                 
-                # Insert the point
                 self.client.upsert(
                     collection_name=collection_name,
-                    points=[point]
+                    points=[point],
+                    wait=True
                 )
             
-            st.success(f"Successfully stored document '{doc_id}' as a single point with {len(chunks)} chunks")
+            st.success(f"Stored document '{doc_id}' with {len(chunks)} chunks")
         
         except Exception as e:
-            st.error(f"Error storing document as single point: {str(e)}")
+            st.error(f"Failed to store document as single point: {str(e)}")
             raise
     
     def clear_collection(self, collection_name: str = "vku_document_mul_point_json") -> None:
         """
-        Clear all documents from a collection.
+        Clear all documents from a collection and recreate it.
         
         Args:
             collection_name (str): Name of the collection to clear
         """
         try:
             self.client.delete_collection(collection_name=collection_name)
-            st.success(f"Collection '{collection_name}' deleted successfully")
-            # Recreate empty collection
+            st.success(f"Collection '{collection_name}' cleared")
             self.get_collection(collection_name)
         except Exception as e:
-            st.error(f"Error clearing collection: {str(e)}")
+            st.error(f"Failed to clear collection: {str(e)}")
             raise
 
 @st.cache_resource
@@ -271,22 +287,19 @@ def initialize_document_store() -> DocumentStore:
     Returns:
         DocumentStore: Initialized document store
     """
-    qdrant_url = QDRANT_URL
-    qdrant_api_key = QDRANT_KEY
+    if not QDRANT_URL or not QDRANT_KEY:
+        st.error("Qdrant credentials missing. Please configure QDRANT_URL and QDRANT_KEY.")
+        raise ValueError("Missing Qdrant credentials")
     
-    if not qdrant_url or not qdrant_api_key:
-        st.warning("Qdrant credentials not found. Please configure them in the settings.")
-    
-    return DocumentStore(qdrant_url=qdrant_url, qdrant_api_key=qdrant_api_key)
+    return DocumentStore(qdrant_url=QDRANT_URL, qdrant_api_key=QDRANT_KEY)
 
 def store_document_chunks(chunks: List[str], use_single_point: bool = True) -> None:
     """
     Store document chunks using the document store.
     
     Args:
-        doc_id (str): Unique document identifier
         chunks (List[str]): List of text chunks to store
-        use_single_point (bool): Whether to store as a single point (True) or multiple points (False)
+        use_single_point (bool): Store as single point (True) or multiple points (False)
     """
     doc_store = initialize_document_store()
     doc_id = str(uuid.uuid4())
@@ -302,7 +315,7 @@ def get_relevant_chunks(query: str, top_k: int = 3, use_hybrid_search: bool = Tr
     Args:
         query (str): User query
         top_k (int): Number of results to retrieve
-        use_hybrid_search (bool): Whether to use hybrid search for single-point documents
+        use_hybrid_search (bool): Whether to use hybrid search
         
     Returns:
         List[str]: List of relevant text chunks

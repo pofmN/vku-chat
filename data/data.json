@@ -12,7 +12,7 @@
             "mô tả": "Sinh viên sau khi tốt nghiệp có việc làm theo thông tin công khai",
             "đường dẫn việc làm": "https://vku.udn.vn/cong-khai-nam-hoc"
         },
-        "tổ chức bộ máy": {
+        "cán bộ lãnh đạo": {
             "hội đồng trường": {
                 "chủ tịch": "PGS.TS. Nguyễn Thanh Bình"
             },
@@ -20,11 +20,11 @@
                 "hiệu trưởng": "PGS.TS. Huỳnh Công Pháp",
                 "phó hiệu trưởng": "TS. Trần Thế Sơn"
             },
-            "đoàn thể": {
+            "đoàn thanh niên": {
                 "chủ tịch công đoàn trường": "Ths. Trần Đình Sơn",
                 "bí thư đoàn thanh niên": "Ths. Nguyễn Văn Hưng"
             },
-            "các khoa, phòng chức năng, trung tâm và các đơn vị": [
+            "các khoa, phòng, trung tâm và các đơn vị": [
                 {
                     "tên đơn vị": "Khoa học máy tính",
                     "website/email/fanpage": [
@@ -1753,14 +1753,10 @@
             "mức học phí": [
                 {
                     "chương trình": "Đại học chính quy",
-                    "mức phí": "Khoảng 15.000.000 - 25.000.000 VNĐ/năm tùy theo ngành học."
+                    "mức phí": "Khoảng 15.000.000 - 20.000.000 VNĐ/năm tùy theo ngành học.(400.000-500.000/tín chỉ)"
                 },
                 {
-                    "chương trình": "Chất lượng cao",
-                    "mức phí": "Khoảng 30.000.000 - 40.000.000 VNĐ/năm."
-                },
-                {
-                    "chương trình": "Sau đại học",
+                    "chương trình": "Sau đại học(thạc sĩ)",
                     "mức phí": "Khoảng 25.000.000 - 35.000.000 VNĐ/năm."
                 }
             ],
@@ -1775,7 +1771,7 @@
                 },
                 {
                     "tên": "Phí ở ký túc xá",
-                    "mức phí": "Khoảng 500.000 - 1.500.000 VNĐ/tháng tùy theo loại phòng."
+                    "mức phí": "Khoảng 100.000 - 400.000 VNĐ/người/tháng tùy theo loại phòng và số lượng."
                 }
             ]
         },
