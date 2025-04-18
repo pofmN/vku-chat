@@ -17,7 +17,7 @@ A powerful document retrieval system using vector search with hybrid ranking for
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/enhanced-document-retriever.git
+git clone https://github.com/pofmN/vku-chat.git
 cd enhanced-document-retriever
 
 # Install dependencies
