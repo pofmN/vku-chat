@@ -2,6 +2,7 @@ import os
 import uuid
 from typing import List, Dict, Any, Optional
 import qdrant_client
+
 from rank_bm25 import BM25Okapi
 from qdrant_client.http import models
 import streamlit as st
@@ -36,7 +37,7 @@ class DocumentStore:
             timeout=30
         )
         
-    def get_collection(self, collection_name: str = "vku_document_mul_point_json") -> None:
+    def get_collection(self, collection_name: str = "vku_document_single_point_v3") -> None:
         """
         Get or create a Qdrant collection with optimized configuration.
         
@@ -70,7 +71,7 @@ class DocumentStore:
         self, 
         doc_id: str,
         chunks: List[str], 
-        collection_name: str = "vku_document_mul_point_json"
+        collection_name: str = "vku_document_single_point_v3"
     ) -> None:
         """
         Store document chunks as individual points in Qdrant with batch processing.
@@ -141,45 +142,38 @@ class DocumentStore:
     def retrieve_relevant_chunks(
         self,
         query: str, 
-        collection_name: str = "vku_document_mul_point_json", 
-        top_k: int = 3,
+        collection_name: str = "vku_document_single_point_v3", 
+        top_k: int = 5,
         use_hybrid_search: bool = True,
         dense_weight: float = 0.5,
         bm25_weight: float = 0.5,
-        top_chunks_per_doc: int = 3
+        top_chunks_per_doc: int = 4
     ) -> List[str]:
         """
         Retrieve relevant document chunks using hybrid search (Dense + BM25).
-        
-        Args:
-            query (str): User query
-            collection_name (str): Qdrant collection name
-            top_k (int): Number of top documents to retrieve
-            use_hybrid_search (bool): Whether to use hybrid search
-            dense_weight (float): Weight for dense similarity score
-            bm25_weight (float): Weight for BM25 score
-            top_chunks_per_doc (int): Max chunks to return per document
-            
-        Returns:
-            List[str]: Relevant text chunks
         """
         try:
+            # Encode the query
             query_embedding = embedding_model.encode(query).tolist()
+            
+            # Search for more documents to ensure diversity
             search_results = self.client.search(
                 collection_name=collection_name,
                 query_vector=query_embedding,
-                limit=top_k,
+                limit=top_k * 2,  # Retrieve more documents to ensure diversity
                 with_payload=True
             )
 
-            relevant_chunks = []
+            # Create a single list of all chunks with their scores
+            all_ranked_chunks = []
+            seen_chunk_texts = set()
             tokenized_query = query.split()
 
             for point in search_results:
                 if "chunks" in point.payload:
                     chunks = point.payload["chunks"]
                     if use_hybrid_search:
-                        ranked_chunks = []
+                        # Create BM25 scores for this document's chunks
                         bm25 = BM25Okapi([c["text"].split() for c in chunks])
                         bm25_scores = bm25.get_scores(tokenized_query)
                         
@@ -187,6 +181,14 @@ class DocumentStore:
                         bm25_scores = self._normalize_scores(np.array(bm25_scores))
                         
                         for i, chunk in enumerate(chunks):
+                            chunk_text = chunk["text"]
+                            
+                            # Skip if we've seen this exact text before
+                            if chunk_text in seen_chunk_texts:
+                                continue
+                                
+                            seen_chunk_texts.add(chunk_text)
+                            
                             # Dense score
                             chunk_embedding = np.array(chunk["embedding"])
                             query_emb = np.array(query_embedding)
@@ -196,26 +198,58 @@ class DocumentStore:
                             
                             # Combine scores
                             combined_score = dense_weight * cosine_sim + bm25_weight * bm25_scores[i]
-                            ranked_chunks.append((chunk, combined_score))
-
-                        ranked_chunks = sorted(ranked_chunks, key=lambda x: x[1], reverse=True)
-                        relevant_chunks.extend([chunk["text"] for chunk, _ in ranked_chunks[:top_chunks_per_doc]])
+                            
+                            # Add document identifier to help with diversity
+                            doc_id = point.id
+                            all_ranked_chunks.append((chunk_text, combined_score, doc_id))
                     else:
-                        relevant_chunks.extend([chunk["text"] for chunk in chunks[:top_chunks_per_doc]])
+                        # For non-hybrid search, just add chunks with a placeholder score
+                        for chunk in chunks:
+                            chunk_text = chunk["text"]
+                            if chunk_text not in seen_chunk_texts:
+                                seen_chunk_texts.add(chunk_text)
+                                doc_id = point.id
+                                all_ranked_chunks.append((chunk_text, 1.0, doc_id))
                 else:
-                    relevant_chunks.append(point.payload["text"])
+                    # Handle single text payload
+                    chunk_text = point.payload.get("text", "")
+                    if chunk_text and chunk_text not in seen_chunk_texts:
+                        seen_chunk_texts.add(chunk_text)
+                        doc_id = point.id
+                        all_ranked_chunks.append((chunk_text, 1.0, doc_id))
 
-            return relevant_chunks[:top_k * top_chunks_per_doc]
+            # Sort all chunks by score
+            all_ranked_chunks.sort(key=lambda x: x[1], reverse=True)
+            
+            # Implement diversity by selecting chunks from different documents
+            selected_chunks = []
+            selected_docs = set()
+            
+            # First, select top chunk from each document
+            for chunk_text, score, doc_id in all_ranked_chunks:
+                if doc_id not in selected_docs and len(selected_chunks) < top_k:
+                    selected_chunks.append(chunk_text)
+                    selected_docs.add(doc_id)
+            
+            # Then, add remaining chunks by score until we reach the desired count
+            for chunk_text, score, doc_id in all_ranked_chunks:
+                if chunk_text not in selected_chunks and len(selected_chunks) < top_k * top_chunks_per_doc:
+                    selected_chunks.append(chunk_text)
+                    
+                    # Stop when we've reached the target number
+                    if len(selected_chunks) >= top_k:
+                        break
+
+            return selected_chunks
 
         except Exception as e:
             st.error(f"Failed to retrieve relevant chunks: {str(e)}")
             raise
-    
     def store_document_as_single_point(
         self, 
         doc_id: str,
         chunks: List[str], 
-        collection_name: str = "vku_document_mul_point_json"
+        collection_name: str = "vku_document_single_point_v3"
     ) -> None:
         """
         Store all chunks of a document in a single Qdrant point.
@@ -264,7 +298,7 @@ class DocumentStore:
             st.error(f"Failed to store document as single point: {str(e)}")
             raise
     
-    def clear_collection(self, collection_name: str = "vku_document_mul_point_json") -> None:
+    def clear_collection(self, collection_name: str = "vku_document_single_point_v3") -> None:
         """
         Clear all documents from a collection and recreate it.
         
