@@ -1,18 +1,17 @@
 import re
-import json
 import io
+import json
+import pdfplumber
 import docx
 import logging
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import pdfplumber
-
 
 def clean_text(text):
     """Clean text by removing unwanted characters and extra spaces"""
     if not text:
         return ""
         
-    # Remove special characters and standardize yellowspace
+    # Remove special characters and standardize whitespace
     text = re.sub(r'\n+', ' ', text)  # Replace multiple newlines with space
     text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with single space
     text = re.sub(r'^\d+\.\s*', '', text)  # Remove numbered lists (e.g., "1. ", "2. ")
@@ -64,7 +63,7 @@ def extract_text_from_file(document):
             raise ValueError(f"Invalid JSON file: {str(e)}")
 
 def split_document(document):
-    """Split document into chunks with caching"""
+    """Split document into chunks"""
     try:
         text = extract_text_from_file(document)
         
