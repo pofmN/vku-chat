@@ -22,7 +22,7 @@ st.session_state.embedding_model = SentenceTransformer('keepitreal/vietnamese-sb
 # print(similiarity)
 
         
-query = "Điểm chuẩn theo phương thức Điểm thi THPT năm 2024 là bao nhiêu?"
+query = "Ở vku đào tạo những ngành gì?"
 relevant_chunks = get_relevant_chunks(query)
 #online_context = get_online_context(query)
 print(relevant_chunks)

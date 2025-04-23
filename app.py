@@ -24,6 +24,7 @@ from transformers import AutoTokenizer, AutoModel
 from storage import store_document_chunks, get_relevant_chunks
 from config.secretKey import GEMINI_API_KEY
 from get_context_online import get_online_context
+from process_data import extract_text_from_file, clean_text, split_document
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -215,6 +216,9 @@ st.markdown("""
         background-color: #28a745;
         color: yellow;
     }
+    .watermark {
+        text-align: center        
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -250,88 +254,88 @@ def initialize_gemini():
     genai.configure(api_key=GEMINI_API_KEY)
     return genai.GenerativeModel('gemini-2.0-flash-lite')
 
-def clean_text(text):
-    """Clean text by removing unwanted characters and extra spaces"""
-    if not text:
-        return ""
+# def clean_text(text):
+#     """Clean text by removing unwanted characters and extra spaces"""
+#     if not text:
+#         return ""
         
-    # Remove special characters and standardize yellowspace
-    text = re.sub(r'\n+', ' ', text)  # Replace multiple newlines with space
-    text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with single space
-    text = re.sub(r'^\d+\.\s*', '', text)  # Remove numbered lists (e.g., "1. ", "2. ")
+#     # Remove special characters and standardize yellowspace
+#     text = re.sub(r'\n+', ' ', text)  # Replace multiple newlines with space
+#     text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with single space
+#     text = re.sub(r'^\d+\.\s*', '', text)  # Remove numbered lists (e.g., "1. ", "2. ")
     
-    # Remove extra spaces before and after text
-    return text.strip()
+#     # Remove extra spaces before and after text
+#     return text.strip()
 
-def extract_text_from_file(document):
-    """Extract text from various file formats"""
-    if not document or not hasattr(document, 'name'):
-        raise ValueError("Invalid document object")
+# def extract_text_from_file(document):
+#     """Extract text from various file formats"""
+#     if not document or not hasattr(document, 'name'):
+#         raise ValueError("Invalid document object")
 
-    file_extension = document.name.split('.')[-1].lower()
-    allowed_extensions = ['txt', 'pdf', 'docx', 'json']
+#     file_extension = document.name.split('.')[-1].lower()
+#     allowed_extensions = ['txt', 'pdf', 'docx', 'json']
     
-    if file_extension not in allowed_extensions:
-        raise ValueError(f"Unsupported file type: {file_extension}")
+#     if file_extension not in allowed_extensions:
+#         raise ValueError(f"Unsupported file type: {file_extension}")
     
-    file_content = document.getvalue()
+#     file_content = document.getvalue()
     
-    # Handle different file types
-    if file_extension == 'txt':
-        for encoding in ['utf-8', 'latin-1', 'ascii']:
-            try:
-                return file_content.decode(encoding)
-            except UnicodeDecodeError:
-                continue
-        raise ValueError("Failed to decode the text file with supported encodings")
+#     # Handle different file types
+#     if file_extension == 'txt':
+#         for encoding in ['utf-8', 'latin-1', 'ascii']:
+#             try:
+#                 return file_content.decode(encoding)
+#             except UnicodeDecodeError:
+#                 continue
+#         raise ValueError("Failed to decode the text file with supported encodings")
     
-    elif file_extension == 'pdf':
-        with pdfplumber.open(io.BytesIO(file_content)) as pdf:
-            text = " ".join([page.extract_text() or "" for page in pdf.pages])
-        if not text:
-            raise ValueError("No text could be extracted from the PDF")
-        return text
+#     elif file_extension == 'pdf':
+#         with pdfplumber.open(io.BytesIO(file_content)) as pdf:
+#             text = " ".join([page.extract_text() or "" for page in pdf.pages])
+#         if not text:
+#             raise ValueError("No text could be extracted from the PDF")
+#         return text
     
-    elif file_extension == 'docx':
-        doc = docx.Document(io.BytesIO(file_content))
-        text = "\n".join([paragraph.text for paragraph in doc.paragraphs])
-        if not text:
-            raise ValueError("No text could be extracted from the DOCX file")
-        return text
+#     elif file_extension == 'docx':
+#         doc = docx.Document(io.BytesIO(file_content))
+#         text = "\n".join([paragraph.text for paragraph in doc.paragraphs])
+#         if not text:
+#             raise ValueError("No text could be extracted from the DOCX file")
+#         return text
     
-    elif file_extension == 'json':
-        try:
-            json_data = json.loads(file_content.decode('utf-8'))
-            return json.dumps(json_data, indent=2)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Invalid JSON file: {str(e)}")
+#     elif file_extension == 'json':
+#         try:
+#             json_data = json.loads(file_content.decode('utf-8'))
+#             return json.dumps(json_data, indent=2)
+#         except json.JSONDecodeError as e:
+#             raise ValueError(f"Invalid JSON file: {str(e)}")
 
-def split_document(document):
-    """Split document into chunks with caching"""
-    try:
-        text = extract_text_from_file(document)
+# def split_document(document):
+#     """Split document into chunks with caching"""
+#     try:
+#         text = extract_text_from_file(document)
         
-        # Validate extracted text
-        if not text:
-            raise ValueError("No text could be extracted from the document")
+#         # Validate extracted text
+#         if not text:
+#             raise ValueError("No text could be extracted from the document")
         
-        # Clean the text before splitting
-        text = clean_text(text)
+#         # Clean the text before splitting
+#         text = clean_text(text)
             
-        # Split text into chunks
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=850,
-            chunk_overlap=300,
-            separators=["\n\n", "\n", ". ", " ", ""]
-        )
-        chunks = text_splitter.split_text(text)
+#         # Split text into chunks
+#         text_splitter = RecursiveCharacterTextSplitter(
+#             chunk_size=850,
+#             chunk_overlap=300,
+#             separators=["\n\n", "\n", ". ", " ", ""]
+#         )
+#         chunks = text_splitter.split_text(text)
         
-        # Clean chunks before returning
-        return [clean_text(chunk) for chunk in chunks]
+#         # Clean chunks before returning
+#         return [clean_text(chunk) for chunk in chunks]
     
-    except Exception as e:
-        logging.error(f"Error processing document: {str(e)}")
-        raise
+#     except Exception as e:
+#         logging.error(f"Error processing document: {str(e)}")
+#         raise
 
 def generate_enhanced_prompt(language, context, prompt):
     """Generate the enhanced prompt based on language"""
@@ -355,9 +359,9 @@ def generate_enhanced_prompt(language, context, prompt):
 
             Please provide your response:"""
     else:
-        return f"""Dựa trên ngữ cảnh được cung cấp, hãy đưa ra câu trả lời toàn diện, chính xác giải thích mềm mại dài dòng văn chương nhiều nhất có thể
+        return f"""Bạn là một chatbot tư vấn tuyển sinh sử dụng kiến trúc RAG. Dựa trên ngữ cảnh được cung cấp, hãy đưa ra câu trả lời chính xác, giải thích mềm mại, chi tiết kết hợp một tí dí dỏm.
         và phù hợp với mục đích tư vấn tuyển sinh. đây là đường trang tuyển sinh của trường https://tuyensinh.vku.udn.vn/, hãy khuyên người dùng truy cập trang này
-        nếu ngữ cảnh chưa đầy đủ, Chú ý tới những liên kết được đề cập, sau đó hãy xử lý theo các bước được hướng dẫn dưới đây.
+        nếu ngữ cảnh chưa đầy đủ, Chú ý tới những liên kết, con số, liên hệ được đề cập, sau đó hãy xử lý theo các bước được hướng dẫn dưới đây.
 
             Ngữ cảnh: {context}
 
@@ -366,14 +370,14 @@ def generate_enhanced_prompt(language, context, prompt):
             Hướng dẫn:
             - Tập trung vào thông tin có trong ngữ cảnh được cung cấp để trả lời câu hỏi.
             - Nếu thông tin trong ngữ cảnh đầy đủ, trích dẫn cụ thể và cấu trúc câu trả lời rõ ràng, logic, bao gồm tất cả các điểm liên quan 
-            và diễn dãi thêm nội dung để câu trả lời ý nghĩa hơn, không đề cập việc đã sử dụng ngữ cảnh để trả lời
+            và diễn dãi thêm nội dung để câu trả lời ý nghĩa, vui nhộn hơn, không đề cập việc đã sử dụng ngữ cảnh để trả lời
             - Nếu thông tin trong ngữ cảnh không đủ hoặc mơ hồ:
               1. Thừa nhận rằng thông tin hiện tại từ dữ liệu hiện tại không đầy đủ để trả lời toàn diện.
               2. Dựa trên kiến thức chung về tuyển sinh của riêng bạn(ví dụ: quy trình đăng ký, tiêu chí xét tuyển, lịch trình thông thường), đưa ra câu trả lời hợp lý, uyển chuyển 
               hướng người dùng tới https://tuyensinh.vku.udn.vn/ để được tư vấn.
               3. Đề xuất người dùng cung cấp thêm chi tiết hoặc tích vào ô sử dụng Internet để có câu trả lời chính xác hơn.
             - Tránh đưa ra thông tin sai lệch hoặc suy đoán không có căn cứ; nếu không chắc chắn, hãy nêu rõ điều đó.
-            - Đảm bảo câu trả lời sinh động, tự nhiên, dễ hiểu, và phù hợp với nhu cầu của học sinh/sinh viên trong bối cảnh tư vấn tuyển sinh.
+            - Đảm bảo câu trả lời sinh động, tự nhiên, dễ hiểu, vui nhộn, hoạt ngôn và phù hợp với nhu cầu, lứa tuổi của học sinh/sinh viên trong bối cảnh tư vấn tuyển sinh.
             - Nếu có nhiều khía cạnh liên quan trong câu hỏi, phân tích từng khía cạnh một cách có tổ chức.
 
             Vui lòng cung cấp câu trả lời của bạn một cách văn chương, dài nhất có thể:"""
@@ -724,7 +728,7 @@ with tab3:
 st.markdown('<div class="footer">', unsafe_allow_html=True)
 st.markdown(
     """
-    <div>
+    <div class="watermark">
         <p>📚 Document Q&A VKU Assistant | Built with Streamlit • Powered by Nam-Giang</p>
         <p>© 2025 - Vietnam-Korea University of Information and Communication Technology</p>
     </div>
