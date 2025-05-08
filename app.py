@@ -101,6 +101,9 @@ def main():
         if prompt := st.chat_input("Ask a question about your document..."):
             # Add user message to state
             st.session_state.messages.append({"role": "user", "content": prompt})
+
+            # Routing promt from user
+            
             
             # Display user message directly in the container
             with chat_container:
@@ -176,7 +179,7 @@ def main():
             uploaded_file = st.file_uploader(
                 "Upload your document",
                 type=["txt", "pdf", "docx", "json"],
-                help="Supported formats: TXT, PDF, DOCX, JSON"
+                help="Supported formats: TXT, PDF, DOCX, JSON"  
             )
         
         # Process uploaded file

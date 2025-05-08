@@ -2,13 +2,13 @@ import os
 import uuid
 from typing import List, Dict, Any, Optional
 import qdrant_client
-
 from rank_bm25 import BM25Okapi
 from qdrant_client.http import models
 import streamlit as st
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from get_context_online import get_online_context
+from get_context_online_2 import get_tavily_response
 from config.secretKey import QDRANT_KEY, QDRANT_URL
 
 # Initialize embedding model with cached resource to avoid reloading
@@ -37,7 +37,7 @@ class DocumentStore:
             timeout=30
         )
         
-    def get_collection(self, collection_name: str = "vku_document_single_point_v3") -> None:
+    def get_collection(self, collection_name: str = "vku_document_mul_point_v1") -> None:
         """
         Get or create a Qdrant collection with optimized configuration.
         
@@ -67,11 +67,11 @@ class DocumentStore:
             st.error(f"Failed to access/create collection: {str(e)}")
             raise
     
-    def store_document_chunks(
+    def store_document_chunks_as_mul_point(
         self, 
         doc_id: str,
         chunks: List[str], 
-        collection_name: str = "vku_document_single_point_v3"
+        collection_name: str = "vku_document_mul_point_v1"
     ) -> None:
         """
         Store document chunks as individual points in Qdrant with batch processing.
@@ -142,11 +142,11 @@ class DocumentStore:
     def retrieve_relevant_chunks(
         self,
         query: str, 
-        collection_name: str = "vku_document_single_point_v3", 
+        collection_name: str = "vku_document_mul_point_v1", 
         top_k: int = 5,
         use_hybrid_search: bool = True,
-        dense_weight: float = 0.5,
-        bm25_weight: float = 0.5,
+        dense_weight: float = 0.3,
+        bm25_weight: float = 0.7,
         top_chunks_per_doc: int = 4
     ) -> List[str]:
         """
@@ -249,7 +249,7 @@ class DocumentStore:
         self, 
         doc_id: str,
         chunks: List[str], 
-        collection_name: str = "vku_document_single_point_v3"
+        collection_name: str = "vku_document_mul_point_v1"
     ) -> None:
         """
         Store all chunks of a document in a single Qdrant point.
@@ -298,7 +298,7 @@ class DocumentStore:
             st.error(f"Failed to store document as single point: {str(e)}")
             raise
     
-    def clear_collection(self, collection_name: str = "vku_document_single_point_v3") -> None:
+    def clear_collection(self, collection_name: str = "vku_document_mul_point_v1") -> None:
         """
         Clear all documents from a collection and recreate it.
         
@@ -327,7 +327,7 @@ def initialize_document_store() -> DocumentStore:
     
     return DocumentStore(qdrant_url=QDRANT_URL, qdrant_api_key=QDRANT_KEY)
 
-def store_document_chunks(chunks: List[str], use_single_point: bool = True) -> None:
+def store_document_chunks(chunks: List[str], use_single_point: bool = False) -> None:
     """
     Store document chunks using the document store.
     
@@ -340,7 +340,7 @@ def store_document_chunks(chunks: List[str], use_single_point: bool = True) -> N
     if use_single_point:
         doc_store.store_document_as_single_point(doc_id, chunks)
     else:
-        doc_store.store_document_chunks(doc_id, chunks)
+        doc_store.store_document_chunks_as_mul_point(doc_id, chunks)
 
 def get_relevant_chunks(query: str, top_k: int = 3, use_hybrid_search: bool = True) -> List[str]:
     """

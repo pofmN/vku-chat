@@ -3,7 +3,7 @@ import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from sentence_transformers import SentenceTransformer
 #from config.secretKey import GEMINI_API_KEY
-from config.secretKey import GEMINI_API_KEY
+from config.secretKey import GEMINI_API_KEY_1
 import logging
 
 #GEMINI_API_KEY = "AIzaSyAni4v1XkTytjIZtjl1-wov-DER9QpwSHs"
@@ -19,6 +19,6 @@ def load_embedding_models():
 @st.cache_resource
 def initialize_gemini():
     """Initialize and cache Gemini client"""
-    logger.debug(f"Initializing Gemini with API key: {GEMINI_API_KEY[:5]}...{GEMINI_API_KEY[-5:]}")
-    genai.configure(api_key=GEMINI_API_KEY)
-    return genai.GenerativeModel('gemini-2.0-flash-lite')
+    logger.debug(f"Initializing Gemini with API key: {GEMINI_API_KEY_1[:5]}...{GEMINI_API_KEY_1[-5:]}")
+    genai.configure(api_key=GEMINI_API_KEY_1)
+    return genai.GenerativeModel('gemini-2.0-flash')

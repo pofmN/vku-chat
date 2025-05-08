@@ -3,3 +3,5 @@
 /unsloth.Q8_0.gguf
 /config.py
 /config/secretKey.py
+/.env
+/.env.local

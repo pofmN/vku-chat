@@ -6,18 +6,16 @@ import docx
 import logging
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-def clean_text(text):
-    """Clean text by removing unwanted characters and extra spaces"""
-    if not text:
-        return ""
-        
-    # Remove special characters and standardize whitespace
-    text = re.sub(r'\n+', ' ', text)  # Replace multiple newlines with space
-    text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with single space
-    text = re.sub(r'^\d+\.\s*', '', text)  # Remove numbered lists (e.g., "1. ", "2. ")
-    
-    # Remove extra spaces before and after text
-    return text.strip()
+def clean_text(text: str) -> str:
+    """Clean text by removing special characters and extra whitespace."""
+    # Remove HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
+    # Remove special characters and extra whitespace
+    text = re.sub(r'[^\w\s.,!?]', ' ', text)
+    # Remove extra whitespace
+    text = ' '.join(text.split())
+    return text
+
 
 def extract_text_from_file(document):
     """Extract text from various file formats"""

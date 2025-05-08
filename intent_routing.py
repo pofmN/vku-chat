@@ -1,0 +1,103 @@
+from typing import Literal
+import os
+import dotenv
+from dotenv import load_dotenv
+import getpass
+import webbrowser
+from urllib.parse import quote
+from utils import clean_text
+from storage import get_relevant_chunks
+from get_context_online import get_online_context
+from get_context_online_2 import get_tavily_response
+from response_generator import generate_response
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+
+load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+
+# Debug: Print if we found the key
+if os.environ.get("GOOGLE_API_KEY"):
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    print(f"Google API key loaded successfully (starts with {api_key[:5]}...)")
+else:
+    print("No API key found in environment variables. Prompting for input...")
+    api_key = getpass.getpass("Enter your Google AI API key: ")
+    os.environ["GOOGLE_API_KEY"] = api_key
+    print("API key set manually.")
+
+intent_prompt = PromptTemplate.from_template(
+    """Classify the user's intent into one of the following: 
+    'research_university', 'write_email', or 'normal_chatting'.
+    
+    User input: {user_input}
+    
+    Respond with only the intent label.
+    """
+)
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash",
+    temperature=0,
+    max_tokens=None,
+    timeout=None
+)
+
+intent_chain = intent_prompt | llm | StrOutputParser()
+
+def detect_intent(user_input: str) -> str:
+    return intent_chain.invoke({"user_input": user_input}).strip()
+ 
+def dispatch_intent(intent: str, user_input:str):
+    if intent == "research_university":
+        research_prompt = PromptTemplate.from_template(
+            """Đánh giá sự liên quan giữa "{query}" từ người dùng và ngữ cảnh sau:
+            "{context}" sau đó trả về kết quả là 1 trong 2 giá trị sau:
+            'relevant' hoặc 'not_relevant'.
+            """
+        )
+        research_chain = research_prompt | llm | StrOutputParser()
+        relevant_chunks = get_relevant_chunks(user_input)
+        cleaned_chunks = [clean_text(chunk) for chunk in relevant_chunks]
+        context = " ".join(cleaned_chunks)
+        research_result = research_chain.invoke({"query": user_input, "context": context}).strip()
+        if research_result == "relevant":
+            print("Relevant context found in database.")
+        else:
+            print("No relevant context found in database.")
+            print("Searching online for context...")
+            context = get_online_context(user_input) + " " + get_tavily_response(user_input)
+        response = generate_response(user_input, context)
+        return response
+    elif intent == "write_email":
+        return generate_university_email(user_input)
+    
+
+
+def generate_university_email(user_input: str):
+    # Generate email content
+    email_prompt = PromptTemplate.from_template(
+    """You're an assistant writing formal emails to universities.
+    Write a polite, professional email based on this request: "{user_input}"
+    """
+    )
+    email_chain = email_prompt | llm | StrOutputParser()
+    email_text = email_chain.invoke({"user_input": user_input})
+    
+    # Email parameters
+    recipient = "congtactuyensinh.vku.udn.vn"  # Replace with actual email address
+    subject = "University Inquiry"  # You can make this dynamic based on user_input
+    body = email_text
+    
+    # Create mailto URL
+    mailto_url = f"mailto:{recipient}?subject={quote(subject)}&body={quote(body)}"
+    
+    # Open default email client
+    webbrowser.open(mailto_url)
+    
+    response_text = f"Email generated and opened in your mail client:\n\nTo: {recipient}\nSubject: {subject}\n\n{email_text}"
+    return response_text
+
+

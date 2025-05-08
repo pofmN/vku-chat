@@ -1,96 +1,84 @@
-import requests
-import logging
-import streamlit as st
-from bs4 import BeautifulSoup
+# To install: pip install tavily-python
+import os
+import tavily
+import dotenv
+import re
+from dotenv import load_dotenv
+from utils import clean_text
+from typing import List, Dict
+from tavily import TavilyClient
 
-# Maximum number of search results to consider
-MAX_RESULTS = 3
-# Maximum length of context extracted from each source
-MAX_CONTEXT_LENGTH = 2000
+load_dotenv()
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
+print("TAVILY_API_KEY:", TAVILY_API_KEY)
+client = TavilyClient(api_key=TAVILY_API_KEY)
 
-def get_online_context(query):
-    """Search online for relevant information and extract context"""
-    try:
-        # Add "VKU university" to the query for more relevant results
-        enhanced_query = f"{query} VKU university admissions"
-        
-        # Search using a search API (this is a placeholder - replace with actual search API)
-        search_results = perform_search(enhanced_query)
-        
-        if not search_results:
-            return "No relevant online information found."
-        
-        # Extract content from top search results
-        context = ""
-        for result in search_results[:MAX_RESULTS]:
-            try:
-                content = extract_content_from_url(result.get('url', ''))
-                if content:
-                    context += content[:MAX_CONTEXT_LENGTH] + "\n\n"
-            except Exception as e:
-                logging.error(f"Error extracting content from {result.get('url', '')}: {str(e)}")
-                continue
-        
-        if not context:
-            return "Failed to extract relevant content from online sources."
-        
-        return context.strip()
-    
-    except Exception as e:
-        logging.error(f"Error searching online: {str(e)}")
-        return f"Error searching online: {str(e)}"
-
-def perform_search(query):
-    """Perform a web search (placeholder - implement with actual search API)"""
-    # This is a placeholder implementation
-    # In a real application, you would use a search API like Google Custom Search API,
-    # Bing Search API, or another search service
-    
-    # For the purposes of this stub, we'll return a sample result structure
-    # pointing to the official VKU admissions page
-    
-    return [
-        {
-            'title': 'VKU Admissions',
-            'url': 'https://tuyensinh.vku.udn.vn/',
-            'snippet': 'Official admissions website for Vietnam-Korea University of Information and Communication Technology'
-        },
-        {
-            'title': 'VKU - University Information',
-            'url': 'https://vku.udn.vn/',
-            'snippet': 'Vietnam-Korea University of Information and Communication Technology'
+def preprocess_tavily_response(result: List[dict]) -> List[dict]:
+    """Process the response from Tavily API to extract relevant information."""
+    processed_response = []
+    for result in result:
+        processed_result = {
+            'title': result.get('title', ''),
+            'content': result.get('content', ''),
+            'url': result.get('url', ''),
+            'source': result.get('source', ''),
+            'snippet': result.get('snippet', '')
         }
-    ]
+        # Filter out empty content
+        if processed_result['content'].strip():
+            processed_response.append(processed_result)
+    return processed_response
 
-def extract_content_from_url(url):
-    """Extract and clean content from a URL"""
-    try:
-        # Set a user agent to avoid being blocked
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        
-        # Request the page
-        response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()  # Raise exception for error status codes
-        
-        # Parse the HTML content
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # Remove script and style elements
-        for script in soup(["script", "style"]):
-            script.extract()
-        
-        # Get text from the page
-        text = soup.get_text(separator=' ', strip=True)
-        
-        # Clean the text
-        lines = (line.strip() for line in text.splitlines())
-        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-        text = ' '.join(chunk for chunk in chunks if chunk)
-        
-        return text
+
+def get_tavily_response(query: str) -> List[dict]:
+    """
+    Get search results from Tavily API and preprocess them.
     
+    Args:
+        query (str): Search query
+        
+    Returns:
+        List[Dict]: List of processed search results
+    """
+    try:
+        response = client.search(
+            query=query+'vku',
+            search_type="web",
+            num_results=5,
+            num_results_per_page=5,
+            region="vn",
+            language="vi"
+        )
+        if 'results' in response:
+            processed_results = preprocess_tavily_response(response['results'])
+            result_texts = []
+            for result in processed_results:
+                # Include the most important fields
+                result_text = f"{result['content']} {result['url']} {result['source']}"
+                # Apply special cleaning for online text
+                #result_text = clean_online_text(result_text)
+                result_texts.append(result_text)
+            combined_result = "\n".join(result_texts)
+            #print(f"Combined result: {combined_result}")
+            return combined_result
+        else:
+            print("No results found in Tavily API response.")
+            return []
     except Exception as e:
-        logging.error(f"Error extracting content from {url}: {str(e)}")
-        return ""
+        print(f"Error fetching data from Tavily API: {e}")
+        return []
+    
+def clean_online_text(text: str) -> str:
+    """Clean text retrieved from online sources with extra spacing issues."""
+    # Remove extra spaces between characters (when every character is separated)
+    if '  ' in text and len(text.split()) > len(text) / 3:
+        # This pattern matches text where most characters are separated by spaces
+        text = text.replace('  ', ' ')
+        # Join characters that are separated by single spaces when they shouldn't be
+        text = ''.join(text.split())
+    
+    # Normal cleaning
+    text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with single space
+    text = text.strip()
+    
+    return text
