@@ -6,6 +6,7 @@ from document_processor import compute_file_hash, process_uploaded_file
 from response_generator import generate_response
 from storage import get_relevant_chunks
 from utils import clean_text
+from intent_routing import detect_intent, dispatch_intent
 from get_context_online import get_online_context
 
 # Configure logging
@@ -119,31 +120,31 @@ def main():
             # Handle response generation
             try:
                 with st.spinner("Generating answer..."):
-                    context = ""
-                    
+                    #context = ""
                     # Try to get context from database
-                    try:
-                        relevant_chunks = get_relevant_chunks(prompt)
-                        if relevant_chunks:
-                            cleaned_chunks = [clean_text(chunk) for chunk in relevant_chunks]
-                            context = " ".join(cleaned_chunks)
-                    except Exception as e:
-                        logging.error(f"Database search error: {str(e)}")
+                    # try:
+                    #     relevant_chunks = get_relevant_chunks(prompt)
+                    #     if relevant_chunks:
+                    #         cleaned_chunks = [clean_text(chunk) for chunk in relevant_chunks]
+                    #         context = " ".join(cleaned_chunks)
+                    # except Exception as e:
+                    #     logging.error(f"Database search error: {str(e)}")
                     
-                    # If no context and internet is enabled, try online search
-                    if not context and st.session_state.use_internet:
-                        try:
-                            context = get_online_context(prompt)
-                        except Exception as e:
-                            logging.error(f"Online search error: {str(e)}")
+                    # # If no context and internet is enabled, try online search
+                    # if not context and st.session_state.use_internet:
+                    #     try:
+                    #         context = get_online_context(prompt)
+                    #     except Exception as e:
+                    #         logging.error(f"Online search error: {str(e)}")
                     
-                    if not context:
-                        context = "No specific context available. Providing a general response."
+                    # if not context:
+                    #     context = "No specific context available. Providing a general response."
                     
-                    # Generate response
-                    print("Context from database is: " + context)
-                    assistant_response = generate_response(prompt, context)
-                    
+                    # # Generate response
+                    # print("Context from database is: " + context)
+                    # Detect intent and dispatch accordingly the response
+                    intent = detect_intent(prompt)
+                    assistant_response = dispatch_intent(intent, prompt)
                     # Add assistant message to state
                     st.session_state.messages.append({
                         "role": "assistant", 

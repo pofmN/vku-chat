@@ -45,9 +45,9 @@ llm = ChatGoogleGenerativeAI(
     timeout=None
 )
 
-intent_chain = intent_prompt | llm | StrOutputParser()
 
 def detect_intent(user_input: str) -> str:
+    intent_chain = intent_prompt | llm | StrOutputParser()
     return intent_chain.invoke({"user_input": user_input}).strip()
  
 def dispatch_intent(intent: str, user_input:str):
@@ -73,14 +73,21 @@ def dispatch_intent(intent: str, user_input:str):
         return response
     elif intent == "write_email":
         return generate_university_email(user_input)
+    elif intent == "normal_chatting":
+        normal_chat_prompt = PromptTemplate.from_template(
+            """Bạn là một chatbot trò chuyện vui nhộn, hài hước, dí dỏm. Hãy trả lời câu hỏi sau đây từ người dùng
+              "{user_input}" một cách thân thiện và vui tươi nhất có thể.
+            """
+        )
+        normal_chat_chain = normal_chat_prompt | llm | StrOutputParser()
+        response = normal_chat_chain.invoke({"user_input": user_input}).strip()
+        return response
     
-
-
 def generate_university_email(user_input: str):
     # Generate email content
     email_prompt = PromptTemplate.from_template(
-    """You're an assistant writing formal emails to universities.
-    Write a polite, professional email based on this request: "{user_input}"
+    """Bạn là một chatbot hổ trợ tuyển sinh, hãy tạo cho tôi nội dung của một email 
+     để gửi cho trường đại học dựa trên nội dung hỏi mà user muốn hỏi như sau: "{user_input}"
     """
     )
     email_chain = email_prompt | llm | StrOutputParser()
