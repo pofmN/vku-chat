@@ -1,10 +1,18 @@
 from serpapi import GoogleSearch
+import dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+SERP_API_KEY = os.getenv("SERP_API_KEY")
+print("SERPAPI_API_KEY:", SERP_API_KEY)
 
 def get_online_context(query):
     params = {
         "engine": "google",
         "q": query+":vku",
-        "api_key": "91dcf285233d247f855756a7bc64eaad448f186d9e0f321a3044fd2eab278922"
+        "api_key": SERP_API_KEY,
     }
 
     search = GoogleSearch(params)

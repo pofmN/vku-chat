@@ -52,6 +52,7 @@ def detect_intent(user_input: str) -> str:
  
 def dispatch_intent(intent: str, user_input:str):
     if intent == "research_university":
+        context = ""
         research_prompt = PromptTemplate.from_template(
             """Đánh giá sự liên quan giữa "{query}" từ người dùng và ngữ cảnh sau:
             "{context}" sau đó trả về kết quả là 1 trong 2 giá trị sau:
@@ -61,14 +62,18 @@ def dispatch_intent(intent: str, user_input:str):
         research_chain = research_prompt | llm | StrOutputParser()
         relevant_chunks = get_relevant_chunks(user_input)
         cleaned_chunks = [clean_text(chunk) for chunk in relevant_chunks]
-        context = " ".join(cleaned_chunks)
-        research_result = research_chain.invoke({"query": user_input, "context": context}).strip()
+        context_database = " ".join(cleaned_chunks)
+        research_result = research_chain.invoke({"query": user_input, "context": context_database}).strip()
         if research_result == "relevant":
             print("Relevant context found in database.")
+            context = context_database
         else:
             print("No relevant context found in database.")
             print("Searching online for context...")
             context = get_online_context(user_input) + " " + get_tavily_response(user_input)
+            print("-- Online context retrieved --")
+            print("complete context is: " + context)
+            print("-- Online context retrieved --")
         response = generate_response(user_input, context)
         return response
     elif intent == "write_email":

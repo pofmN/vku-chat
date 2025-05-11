@@ -1,19 +1,23 @@
 
 import streamlit as st
-from storage import get_relevant_chunks
 import dotenv
 import os
 import getpass
 import requests
 from dotenv import load_dotenv
+import sys
+# Add parent directory to sys.path to allow imports from parent directory
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sentence_transformers import SentenceTransformer
 from get_context_online import get_online_context
+from storage import get_relevant_chunks
+
 from get_context_online_2 import get_tavily_response
 from intent_routing import detect_intent, dispatch_intent
 from response_generator import generate_response
 
 #test_prompt = "Ở vku đào tạo những ngành gì?"
-#test_prompt = "Học phí của trường là bao nhiêu?"
+#test_prompt = "    "
 #test_prompt = "Điểm chuẩn vku 2023 là bao nhiêu?"  
 #test_prompt = "Điểm chuẩn vku 2024 là bao nhiêu?"
 
